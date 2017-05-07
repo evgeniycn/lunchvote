@@ -3,13 +3,15 @@ package LunchVote.repository.datajpa;
 import LunchVote.model.Dish;
 import LunchVote.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Evgeniy on 07.05.2017.
  */
+@Repository
 public class DishRepositoryImpl implements DishRepository {
 
-    private CrudDishRepository crudDishRepository;
+    private final CrudDishRepository crudDishRepository;
 
     @Autowired
     public DishRepositoryImpl(CrudDishRepository crudDishRepository) {

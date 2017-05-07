@@ -4,6 +4,7 @@ import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
 import LunchVote.repository.RestrauntRepositoy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,9 +12,10 @@ import java.util.List;
 /**
  * Created by Evgeniy on 07.05.2017.
  */
+@Repository
 public class RestrauntRepositoryImpl implements RestrauntRepositoy {
 
-    private CrudRestrauntRepository crudRestrauntRepository;
+    private final CrudRestrauntRepository crudRestrauntRepository;
 
     @Autowired
     public RestrauntRepositoryImpl(CrudRestrauntRepository crudRestrauntRepository) {

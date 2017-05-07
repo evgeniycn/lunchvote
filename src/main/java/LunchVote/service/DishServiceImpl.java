@@ -2,6 +2,7 @@ package LunchVote.service;
 
 import LunchVote.model.Dish;
 import LunchVote.repository.DishRepository;
+import LunchVote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class DishServiceImpl implements DishService {
     }
 
 
-    public Dish get(int id) {
+    public Dish get(int id) throws NotFoundException {
         return dishRepository.get(id);
     }
 
@@ -27,7 +28,7 @@ public class DishServiceImpl implements DishService {
         return dishRepository.save(dish);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws NotFoundException {
         dishRepository.delete(id);
     }
 }

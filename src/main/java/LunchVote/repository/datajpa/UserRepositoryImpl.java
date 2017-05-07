@@ -3,15 +3,17 @@ package LunchVote.repository.datajpa;
 import LunchVote.model.User;
 import LunchVote.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Evgeniy on 07.05.2017.
  */
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private CrudUserRepository crudUserRepository;
+    private final CrudUserRepository crudUserRepository;
 
     @Autowired
     public UserRepositoryImpl(CrudUserRepository crudUserRepository) {

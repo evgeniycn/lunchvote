@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    User get();
+    User get(int id);
 
     void delete(int id) throws NotFoundException;
 
