@@ -1,0 +1,30 @@
+package LunchVote.repository.datajpa;
+
+import LunchVote.model.Dish;
+import LunchVote.repository.DishRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * Created by Evgeniy on 07.05.2017.
+ */
+public class DishRepositoryImpl implements DishRepository {
+
+    private CrudDishRepository crudDishRepository;
+
+    @Autowired
+    public DishRepositoryImpl(CrudDishRepository crudDishRepository) {
+        this.crudDishRepository = crudDishRepository;
+    }
+
+    public Dish get(int id) {
+        return crudDishRepository.getOne(id);
+    }
+
+    public Dish save(Dish dish) {
+        return crudDishRepository.save(dish);
+    }
+
+    public boolean delete(int id) {
+        return crudDishRepository.delete(id) != 0;
+    }
+}
