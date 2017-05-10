@@ -46,4 +46,12 @@ public class JpaDishRepositoryImpl implements DishRepository {
                 .setParameter("date", date)
                 .getResultList();
     }
+
+    @Override
+    public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
+        return em.createNamedQuery(Dish.ALL_BY_DATE_RESTRAUNT_ID, Dish.class)
+                .setParameter("date", date)
+                .setParameter("restrauntId", restrauntId)
+                .getResultList();
+    }
 }

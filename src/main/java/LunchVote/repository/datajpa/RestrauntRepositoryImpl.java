@@ -41,4 +41,9 @@ public class RestrauntRepositoryImpl implements RestrauntRepositoy {
     public List<Restraunt> getAll() {
         return crudRestrauntRepository.findAll();
     }
+
+    @Override
+    public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
+        return null;
+    }
 }

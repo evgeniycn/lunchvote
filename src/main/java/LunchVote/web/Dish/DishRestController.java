@@ -27,7 +27,11 @@ public class DishRestController {
     }
 
     public List<Dish> getByDate (LocalDate date){
-        return service.getDishByDate(date);
+        return service.getByDate(date);
+    }
+
+    public List<Dish> getByDateRestrauntId (LocalDate date, int restrauntId) {
+        return service.getByDateRestrauntID(date, restrauntId);
     }
 
     public Dish save (Dish dish) {

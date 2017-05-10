@@ -16,31 +16,36 @@ import java.util.List;
 @Service
 public class RestrauntServiceImpl implements RestrauntService {
 
-    private final RestrauntRepositoy restrauntRepositoy;
+    private final RestrauntRepositoy restrauntRepository;
 
     @Autowired
-    public RestrauntServiceImpl(RestrauntRepositoy restrauntRepositoy) {
-        this.restrauntRepositoy = restrauntRepositoy;
+    public RestrauntServiceImpl(RestrauntRepositoy restrauntRepository) {
+        this.restrauntRepository = restrauntRepository;
     }
 
 
     public List<Dish> getAllDishesByDate(LocalDate date) {
-        return restrauntRepositoy.getAllDishesByDate(date);
+        return restrauntRepository.getAllDishesByDate(date);
     }
 
     public Restraunt get(int id) throws NotFoundException {
-        return restrauntRepositoy.get(id);
+        return restrauntRepository.get(id);
     }
 
     public void delete(int id) throws NotFoundException {
-        restrauntRepositoy.delete(id);
+        restrauntRepository.delete(id);
     }
 
     public Restraunt save(Restraunt restraunt) {
-        return restrauntRepositoy.save(restraunt);
+        return restrauntRepository.save(restraunt);
     }
 
     public List<Restraunt> getAll() {
-        return restrauntRepositoy.getAll();
+        return restrauntRepository.getAll();
+    }
+
+    @Override
+    public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
+        return restrauntRepository.getAllWithTodayMenu(date);
     }
 }

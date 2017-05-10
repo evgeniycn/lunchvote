@@ -6,6 +6,8 @@ import LunchVote.repository.RestrauntRepositoy;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,6 +17,10 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public class JpaRestrauntRepositoryImpl implements RestrauntRepositoy {
+
+    @PersistenceContext
+    private EntityManager em;
+
 
     @Override
     public List<Dish> getAllDishesByDate(LocalDate date) {
@@ -39,5 +45,12 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepositoy {
     @Override
     public List<Restraunt> getAll() {
         return null;
+    }
+
+    @Override
+    public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
+        return em.createNamedQuery(Restraunt.ALL_BY_TODAY, Restraunt.class)
+                .setParameter("date", date)
+                .getResultList();
     }
 }

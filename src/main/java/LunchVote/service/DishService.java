@@ -17,5 +17,8 @@ public interface DishService {
 
     void delete(int id);
 
-    List<Dish> getDishByDate (LocalDate date);
+    List<Dish> getByDate (LocalDate date);
+
+    List<Dish> getByDateRestrauntID (LocalDate date, int restrauntId);
+
 }

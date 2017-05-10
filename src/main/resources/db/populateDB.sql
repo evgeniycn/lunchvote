@@ -22,10 +22,10 @@ INSERT INTO DISHES (name, date, price, restraunt_id) VALUES
   ('Sandwich','2015-05-31', 55.50, 100009),
   ('Jarkoe', '2015-05-31', 100.00, 100010);
 
-INSERT INTO RESTRAUNTS (name) VALUES
-  ('Restraunt1'),
-  ('Restraunt2'),
-  ('Restraunt3'),
-  ('Restraunt4'),
-  ('Restraunt5'),
-  ('Restraunt6');
+INSERT INTO RESTRAUNTS (name, update_date) VALUES
+  ('Restraunt1', '2015-05-30'),
+  ('Restraunt2', '2015-05-31'),
+  ('Restraunt3', '2015-05-30'),
+  ('Restraunt4', '2015-05-31'),
+  ('Restraunt5', '2015-05-31'),
+  ('Restraunt6', '2015-05-31');

@@ -36,7 +36,12 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getDishByDate(LocalDate date) {
+    public List<Dish> getByDate(LocalDate date) {
         return dishRepository.getByDate(date);
+    }
+
+    @Override
+    public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
+        return dishRepository.getByDateRestrauntID(date, restrauntId);
     }
 }

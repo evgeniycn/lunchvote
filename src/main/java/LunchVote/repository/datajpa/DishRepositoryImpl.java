@@ -37,4 +37,9 @@ public class DishRepositoryImpl implements DishRepository {
     public List<Dish> getByDate(LocalDate date) {
         return null;
     }
+
+    @Override
+    public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
+        return null;
+    }
 }

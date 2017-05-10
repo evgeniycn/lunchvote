@@ -7,7 +7,8 @@ import java.time.LocalDate;
  * Created by Evgeniy on 07.05.2017.
  */
 @NamedQueries({
-        @NamedQuery(name = Dish.ALL_BY_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date ORDER BY d.date DESC"),
+        @NamedQuery(name = Dish.ALL_BY_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date ORDER BY d.id DESC"),
+        @NamedQuery(name = Dish.ALL_BY_DATE_RESTRAUNT_ID, query = "SELECT d FROM Dish d WHERE d.date=:date AND d.restrauntId=:restrauntId  ORDER BY d.restrauntId DESC"),
         @NamedQuery(name = Dish.DELETE_BY_ID, query = "DELETE FROM Dish d WHERE d.id=:id"),
 })
 @Entity
@@ -15,6 +16,8 @@ import java.time.LocalDate;
 public class Dish extends BaseEntity {
 
     public static final String ALL_BY_DATE = "Dish.getByDate";
+
+    public static final String ALL_BY_DATE_RESTRAUNT_ID = "Dish.getByDateRestrauntId";
 
     public static final String DELETE_BY_ID = "Dish.deleteById";
 
@@ -29,6 +32,10 @@ public class Dish extends BaseEntity {
 
     @Column(name = "RESTRAUNT_ID", nullable = false)
     private int restrauntId;
+
+    @ManyToOne
+    @JoinColumn(name = "restraunt_id")
+    private Restraunt restraunt;
 
     public Dish() {
 
@@ -64,6 +71,14 @@ public class Dish extends BaseEntity {
 
     public void setRestrauntId(int restrauntId) {
         this.restrauntId = restrauntId;
+    }
+
+    public Restraunt getRestraunt() {
+        return restraunt;
+    }
+
+    public void setRestraunt(Restraunt restraunt) {
+        this.restraunt = restraunt;
     }
 
     @Override

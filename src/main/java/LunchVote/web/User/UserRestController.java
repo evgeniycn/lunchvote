@@ -1,4 +1,4 @@
-package LunchVote.web.Dish;
+package LunchVote.web.User;
 
 import LunchVote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

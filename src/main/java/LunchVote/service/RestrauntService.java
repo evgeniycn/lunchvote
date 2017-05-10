@@ -20,4 +20,6 @@ public interface RestrauntService {
     Restraunt save(Restraunt restraunt);
 
     List<Restraunt> getAll();
+
+    List<Restraunt> getAllWithTodayMenu(LocalDate date);
 }
