@@ -2,6 +2,7 @@ package LunchVote.repository;
 
 import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;

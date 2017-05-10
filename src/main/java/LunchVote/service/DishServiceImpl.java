@@ -6,6 +6,9 @@ import LunchVote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  * Created by Evgeniy on 07.05.2017.
  */
@@ -30,5 +33,10 @@ public class DishServiceImpl implements DishService {
 
     public void delete(int id) throws NotFoundException {
         dishRepository.delete(id);
+    }
+
+    @Override
+    public List<Dish> getDishByDate(LocalDate date) {
+        return dishRepository.getByDate(date);
     }
 }

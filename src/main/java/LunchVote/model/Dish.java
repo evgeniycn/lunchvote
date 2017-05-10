@@ -1,19 +1,38 @@
 package LunchVote.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * Created by Evgeniy on 07.05.2017.
  */
+@NamedQueries({
+        @NamedQuery(name = Dish.ALL_BY_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date ORDER BY d.date DESC"),
+        @NamedQuery(name = Dish.DELETE_BY_ID, query = "DELETE FROM Dish d WHERE d.id=:id"),
+})
+@Entity
+@Table(name = "DISHES", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Dish extends BaseEntity {
 
+    public static final String ALL_BY_DATE = "Dish.getByDate";
+
+    public static final String DELETE_BY_ID = "Dish.deleteById";
+
+    @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "PRICE", nullable = false)
     private double price;
 
+    @Column(name = "DATE", nullable = false)
     private LocalDate date;
 
+    @Column(name = "RESTRAUNT_ID", nullable = false)
     private int restrauntId;
+
+    public Dish() {
+
+    }
 
     public int getRestrauntId() {
         return restrauntId;
@@ -45,5 +64,16 @@ public class Dish extends BaseEntity {
 
     public void setRestrauntId(int restrauntId) {
         this.restrauntId = restrauntId;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "id='" + this.getId() + '\'' +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", date=" + date +
+                ", restrauntId=" + restrauntId +
+                '}';
     }
 }
