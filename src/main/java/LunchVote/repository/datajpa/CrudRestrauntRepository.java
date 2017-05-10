@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Evgeniy on 07.05.2017.
  */
-public interface CrudRestrauntRepository extends JpaRepository<Restraunt, Integer> {
+public interface CrudRestrauntRepository {
 
     List<Dish> getAllDishesByDate(LocalDate date);
 

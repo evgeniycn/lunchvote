@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Evgeniy on 07.05.2017.
  */
-public interface CrudUserRepository extends JpaRepository<User, Integer> {
+public interface CrudUserRepository {
 
 
     User getOne(int id);

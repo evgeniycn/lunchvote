@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Evgeniy on 07.05.2017.
  */
-public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
+public interface CrudDishRepository {
 
     Dish getOne(int id);
 
