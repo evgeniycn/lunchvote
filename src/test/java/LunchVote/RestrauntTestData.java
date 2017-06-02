@@ -19,7 +19,7 @@ public class RestrauntTestData {
     //public static final ModelMatcher<Dish> MATCHER = ModelMatcher.of(Meal.class);
     //public static final ModelMatcher<MealWithExceed> MATCHER_WITH_EXCEED = ModelMatcher.of(MealWithExceed.class);
 
-    public static final int RESTRAUNT1_ID = START_SEQ + 8;
+    public static final int RESTRAUNT1_ID = START_SEQ + 11;
     //public static final int ADMIN_MEAL_ID = START_SEQ + 8;
 
     public static final Restraunt RESTRAUNT1 = new Restraunt(RESTRAUNT1_ID, "Restraunt1", of(2015, Month.MAY, 30), Arrays.asList(DISH3, DISH2, DISH1));
@@ -36,10 +36,9 @@ public class RestrauntTestData {
         return new Restraunt(null, "New restraunt", of(2017, Month.JUNE, 1), Collections.emptyList());
     }
 
-    /*
-    public static Dish getUpdated() {
-        return new Dish(DISH1_ID, "Updated dish", 20.00, DISH1.getDate(), 100008);
-    }*/
+    public static Restraunt getUpdated() {
+        return new Restraunt(RESTRAUNT1_ID, "Updated restraunt", of(2017, Month.AUGUST, 22), Arrays.asList(DISH3, DISH2));
+    }
 }
 
 /*

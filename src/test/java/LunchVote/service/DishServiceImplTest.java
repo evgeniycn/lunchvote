@@ -26,16 +26,31 @@ public class DishServiceImplTest extends ServiceImplAbstract  {
 
     @Test
     public void get() throws Exception {
-        assertEquals(DISH1.toString(),service.get(100002).toString());
+        assertEquals(DISH1.toString(),service.get(100005).toString());
     }
 
     @Test
     public void save() throws Exception {
         Dish created = getCreated();
         Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100010));
-        created.setId(100014);
+        created.setId(100017);
         assertEquals(created.toString(), dish.toString());
     }
+
+    @Test
+    public void update() throws Exception {
+        Dish updated = getUpdated();
+        Dish dish = service.get(100005);
+
+        dish.setName(updated.getName());
+        dish.setDate(updated.getDate());
+        dish.setPrice(updated.getPrice());
+        dish.setRestrauntId(updated.getRestrauntId());
+
+        assertEquals(updated.toString(), dish.toString());
+    }
+
+
 
     @Test
     public void delete() throws Exception {
@@ -50,7 +65,7 @@ public class DishServiceImplTest extends ServiceImplAbstract  {
 
     @Test
     public void getByDateRestrauntID() throws Exception {
-        assertEquals(Arrays.asList(DISH4, DISH5).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100009).toString());
+        assertEquals(Arrays.asList(DISH4, DISH5).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
     }
 
     @Test

@@ -23,12 +23,12 @@ public class RestrauntServiceImplTest extends ServiceImplAbstract {
 
     @Test
     public void get() throws Exception {
-        assertEquals(RESTRAUNT1.toString(), service.get(100008).toString());
+        assertEquals(RESTRAUNT1.toString(), service.get(100011).toString());
     }
 
     @Test
     public void delete() throws Exception {
-        service.delete(100008);
+        service.delete(100011);
         assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2).toString(),service.getAll().toString());
     }
 
@@ -36,8 +36,20 @@ public class RestrauntServiceImplTest extends ServiceImplAbstract {
     public void save() throws Exception {
         Restraunt created = getCreated();
         Restraunt restraunt = service.save(new Restraunt(null, "New restraunt", LocalDate.of(2017, Month.JUNE, 1), Collections.emptyList()));
-        created.setId(100014);
+        created.setId(100017);
         assertEquals(created.toString(), restraunt.toString());
+    }
+
+    @Test
+    public void update() throws Exception {
+        Restraunt updated = getUpdated();
+        Restraunt restraunt = service.get(100011);
+
+        restraunt.setName(updated.getName());
+        restraunt.setDishList(updated.getDishList());
+        restraunt.setUpdatedDate(updated.getUpdatedDate());
+
+        assertEquals(updated.toString(), restraunt.toString());
     }
 
     @Test

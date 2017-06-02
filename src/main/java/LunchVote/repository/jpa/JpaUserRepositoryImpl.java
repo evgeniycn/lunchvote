@@ -5,6 +5,8 @@ import LunchVote.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -14,23 +16,35 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class JpaUserRepositoryImpl implements UserRepository {
 
+    @PersistenceContext
+    private EntityManager em;
+
     @Override
     public User get(int id) {
-        return null;
+        return em.find(User.class, id);
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
-        return false;
+        return em.createNamedQuery(User.DELETE_BY_ID)
+                .setParameter("id", id)
+                .executeUpdate()!= 0;
     }
 
     @Override
+    @Transactional
     public User save(User user) {
-        return null;
+        if (user.isNew()) {
+            em.persist(user);
+            return user;
+        }
+        else return em.merge(user);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return em.createNamedQuery(User.ALL, User.class)
+                .getResultList();
     }
 }
