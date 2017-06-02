@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface RestrauntService {
 
-    List<Dish> getAllDishesByDate(LocalDate date);
+    //List<Dish> getAllDishesByDate(LocalDate date);
 
     Restraunt get(int id);
 

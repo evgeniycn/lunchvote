@@ -21,4 +21,6 @@ public interface DishService {
 
     List<Dish> getByDateRestrauntID (LocalDate date, int restrauntId);
 
+    List<Dish> getAll ();
+
 }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface RestrauntRepositoy {
 
-    List<Dish> getAllDishesByDate(LocalDate date);
+    //List<Dish> getAllDishesByDate(LocalDate date);
 
     Restraunt get (int id);
 

@@ -1,6 +1,5 @@
 package LunchVote.repository.jpa;
 
-import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
 import LunchVote.repository.RestrauntRepositoy;
 import org.springframework.stereotype.Repository;
@@ -23,28 +22,32 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepositoy {
 
 
     @Override
-    public List<Dish> getAllDishesByDate(LocalDate date) {
-        return null;
-    }
-
-    @Override
     public Restraunt get(int id) {
-        return null;
+        return em.find(Restraunt.class, id);
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
-        return false;
+        return em.createNamedQuery(Restraunt.DELETE_BY_ID)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
     }
 
     @Override
+    @Transactional
     public Restraunt save(Restraunt restraunt) {
-        return null;
+        if (restraunt.isNew()) {
+            em.persist(restraunt);
+            return restraunt;
+        }
+        else return em.merge(restraunt);
     }
 
     @Override
     public List<Restraunt> getAll() {
-        return null;
+        return em.createNamedQuery(Restraunt.ALL, Restraunt.class)
+                .getResultList();
     }
 
     @Override

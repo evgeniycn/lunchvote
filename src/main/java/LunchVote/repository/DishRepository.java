@@ -20,4 +20,6 @@ public interface DishRepository {
     List<Dish> getByDate (LocalDate date);
 
     List<Dish> getByDateRestrauntID (LocalDate date, int restrauntId);
+
+    List<Dish> getAll();
 }

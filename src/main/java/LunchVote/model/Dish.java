@@ -10,10 +10,13 @@ import java.time.LocalDate;
         @NamedQuery(name = Dish.ALL_BY_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date ORDER BY d.id DESC"),
         @NamedQuery(name = Dish.ALL_BY_DATE_RESTRAUNT_ID, query = "SELECT d FROM Dish d WHERE d.date=:date AND d.restrauntId=:restrauntId  ORDER BY d.restrauntId DESC"),
         @NamedQuery(name = Dish.DELETE_BY_ID, query = "DELETE FROM Dish d WHERE d.id=:id"),
+        @NamedQuery(name = Dish.ALL, query = "SELECT d FROM Dish d ORDER BY d.id DESC"),
 })
 @Entity
 @Table(name = "DISHES", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Dish extends BaseEntity {
+
+    public static final String ALL = "Dish.getAll";
 
     public static final String ALL_BY_DATE = "Dish.getByDate";
 
@@ -34,11 +37,27 @@ public class Dish extends BaseEntity {
     private int restrauntId;
 
     @ManyToOne
-    @JoinColumn(name = "restraunt_id")
+    @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)
     private Restraunt restraunt;
 
     public Dish() {
 
+    }
+
+    /*public Dish(String name, double price, LocalDate date, int restrauntId) {
+        super();
+        this.name = name;
+        this.price = price;
+        this.date = date;
+        this.restrauntId = restrauntId;
+    }*/
+
+    public Dish(Integer id, String name, double price, LocalDate date, int restrauntId) {
+        super(id);
+        this.name = name;
+        this.price = price;
+        this.date = date;
+        this.restrauntId = restrauntId;
     }
 
     public int getRestrauntId() {

@@ -9,6 +9,8 @@ import java.util.List;
  */
 @NamedQueries({
         @NamedQuery(name = Restraunt.ALL_BY_TODAY, query = "SELECT r FROM Restraunt r WHERE r.updateDate=:date ORDER BY r.id DESC"),
+        @NamedQuery(name = Restraunt.DELETE_BY_ID, query = "DELETE FROM Restraunt r WHERE r.id=:id"),
+        @NamedQuery(name = Restraunt.ALL, query = "SELECT r FROM Restraunt r ORDER BY r.id DESC"),
 })
 
 @Entity
@@ -16,6 +18,10 @@ import java.util.List;
 public class Restraunt extends BaseEntity {
 
     public static final String ALL_BY_TODAY = "Restraunt.getByToday";
+
+    public static final String ALL = "Restraunt.getAll";
+
+    public static final String DELETE_BY_ID = "Restraunt.deleteById";
 
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -30,6 +36,20 @@ public class Restraunt extends BaseEntity {
 
     public Restraunt() {
 
+    }
+
+    public Restraunt(String name, LocalDate updateDate, List<Dish> dishList) {
+        super();
+        this.name = name;
+        this.updateDate = updateDate;
+        this.dishList = dishList;
+    }
+
+    public Restraunt(Integer id, String name, LocalDate updateDate, List<Dish> dishList) {
+        super(id);
+        this.name = name;
+        this.updateDate = updateDate;
+        this.dishList = dishList;
     }
 
     public String getName() {
@@ -59,9 +79,11 @@ public class Restraunt extends BaseEntity {
     @Override
     public String toString() {
         return "Restraunt{" +
+                "id='" + this.getId() + '\'' +
                 "name='" + name + '\'' +
                 ", updateDate=" + updateDate +
                 ", dishList=" + dishList +
                 '}';
     }
+
 }

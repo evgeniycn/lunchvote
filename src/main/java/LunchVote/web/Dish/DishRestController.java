@@ -4,6 +4,8 @@ import LunchVote.model.Dish;
 import LunchVote.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -12,7 +14,7 @@ import java.util.List;
 /**
  * Created by evgeniy on 10.05.2017.
  */
-@Controller
+@RestController (value = "/rest/dishes")
 public class DishRestController {
 
     private DishService service;
@@ -22,6 +24,7 @@ public class DishRestController {
         this.service = service;
     }
 
+    @GetMapping(value = "/{id}")
     public Dish get (int id) {
         return service.get(id);
     }

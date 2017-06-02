@@ -24,9 +24,9 @@ public class RestrauntServiceImpl implements RestrauntService {
     }
 
 
-    public List<Dish> getAllDishesByDate(LocalDate date) {
+    /*public List<Dish> getAllDishesByDate(LocalDate date) {
         return restrauntRepository.getAllDishesByDate(date);
-    }
+    }*/
 
     public Restraunt get(int id) throws NotFoundException {
         return restrauntRepository.get(id);

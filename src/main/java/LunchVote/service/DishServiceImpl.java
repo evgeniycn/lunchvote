@@ -44,4 +44,9 @@ public class DishServiceImpl implements DishService {
     public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
         return dishRepository.getByDateRestrauntID(date, restrauntId);
     }
+
+    @Override
+    public List<Dish> getAll() {
+        return dishRepository.getAll();
+    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by evgeniy on 10.05.2017.
  */
 @Repository
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 public class JpaDishRepositoryImpl implements DishRepository {
 
     @PersistenceContext
@@ -26,6 +26,7 @@ public class JpaDishRepositoryImpl implements DishRepository {
         return dish;
     }
 
+    @Transactional
     public Dish save(Dish dish) {
         if (dish.isNew()) {
             em.persist(dish);
@@ -34,6 +35,7 @@ public class JpaDishRepositoryImpl implements DishRepository {
         else return em.merge(dish);
     }
 
+    @Transactional
     public boolean delete(int id) {
         return em.createNamedQuery(Dish.DELETE_BY_ID)
                 .setParameter("id", id)
@@ -52,6 +54,13 @@ public class JpaDishRepositoryImpl implements DishRepository {
         return em.createNamedQuery(Dish.ALL_BY_DATE_RESTRAUNT_ID, Dish.class)
                 .setParameter("date", date)
                 .setParameter("restrauntId", restrauntId)
+                .getResultList();
+    }
+
+
+    @Override
+    public List<Dish> getAll() {
+        return em.createNamedQuery(Dish.ALL, Dish.class)
                 .getResultList();
     }
 }
