@@ -1,5 +1,6 @@
 package LunchVote.service;
 
+import LunchVote.AbstractTest;
 import LunchVote.model.Restraunt;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 /**
  * Created by evgeniy on 02.06.2017.
  */
-public class RestrauntServiceImplTest extends ServiceImplAbstract {
+public class RestrauntServiceTest extends AbstractTest {
 
 
     @Autowired

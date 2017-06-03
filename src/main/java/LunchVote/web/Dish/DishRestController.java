@@ -3,19 +3,22 @@ package LunchVote.web.Dish;
 import LunchVote.model.Dish;
 import LunchVote.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+
+import static LunchVote.web.Dish.DishRestController.REST_URL;
 
 /**
  * Created by evgeniy on 10.05.2017.
  */
-@RestController (value = "/rest/dishes")
+@RestController
+@RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE )
 public class DishRestController {
+
+    static final String REST_URL = "/rest/dishes";
 
     private DishService service;
 
@@ -24,24 +27,32 @@ public class DishRestController {
         this.service = service;
     }
 
-    @GetMapping(value = "/{id}")
-    public Dish get (int id) {
+    @GetMapping
+    public Dish get (@PathVariable("id") int id) {
         return service.get(id);
     }
 
-    public List<Dish> getByDate (LocalDate date){
+    /*@GetMapping(value = "/{id}")
+    public Dish get (@PathVariable("id") int id) {
+        return service.get(id);
+    }*/
+
+    @GetMapping(value = "/date/{date}")
+    public List<Dish> getByDate (@PathVariable("date") LocalDate date){
         return service.getByDate(date);
     }
 
-    public List<Dish> getByDateRestrauntId (LocalDate date, int restrauntId) {
+    @GetMapping(value = "/date/{date}/restraunt/{id}")
+    public List<Dish> getByDateRestrauntId (@PathVariable("date") LocalDate date, @PathVariable("id") int restrauntId) {
         return service.getByDateRestrauntID(date, restrauntId);
     }
 
-    public Dish save (Dish dish) {
+    @PostMapping
+    public Dish save (@RequestBody Dish dish) {
         return service.save(dish);
     }
 
-    public void delete (int id) {
+    public void delete (@PathVariable("id") int id) {
         service.delete(id);
     }
 }

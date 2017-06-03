@@ -1,13 +1,9 @@
 package LunchVote.service;
 
+import LunchVote.AbstractTest;
 import LunchVote.model.Dish;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -19,7 +15,7 @@ import static org.junit.Assert.*;
 /**
  * Created by evgeniy on 02.06.2017.
  */
-public class DishServiceImplTest extends ServiceImplAbstract  {
+public class DishServiceTest extends AbstractTest {
 
     @Autowired
     private DishService service;

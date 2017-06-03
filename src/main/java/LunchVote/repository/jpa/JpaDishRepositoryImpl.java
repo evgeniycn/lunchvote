@@ -57,7 +57,6 @@ public class JpaDishRepositoryImpl implements DishRepository {
                 .getResultList();
     }
 
-
     @Override
     public List<Dish> getAll() {
         return em.createNamedQuery(Dish.ALL, Dish.class)
