@@ -3,6 +3,8 @@ package LunchVote.web.Dish;
 import LunchVote.AbstractTest;
 import LunchVote.model.Dish;
 import LunchVote.service.DishService;
+import LunchVote.web.Json.JacksonObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -61,14 +63,15 @@ public class DishRestControllerTest extends AbstractTest {
     @Autowired
     private DishService service;
 
+    ObjectMapper mapper = JacksonObjectMapper.getMapper();
+
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + DISH1_ID))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
-
-        //assertEquals(DISH1.toString(),service.get(100005).toString());
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(mapper.writeValueAsString(DISH1)));
     }
 
     @Test

@@ -27,15 +27,11 @@ public class DishRestController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping(value = "/{id}")
     public Dish get (@PathVariable("id") int id) {
-        return service.get(id);
+        Dish dish = service.get(id);
+        return dish;
     }
-
-    /*@GetMapping(value = "/{id}")
-    public Dish get (@PathVariable("id") int id) {
-        return service.get(id);
-    }*/
 
     @GetMapping(value = "/date/{date}")
     public List<Dish> getByDate (@PathVariable("date") LocalDate date){

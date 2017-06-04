@@ -1,5 +1,8 @@
 package LunchVote.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -36,8 +39,9 @@ public class Dish extends BaseEntity {
     @Column(name = "RESTRAUNT_ID", nullable = false)
     private int restrauntId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)
+    @JsonIgnore
     private Restraunt restraunt;
 
     public Dish() {

@@ -1,5 +1,6 @@
 package LunchVote.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class BaseEntity implements Persistable<Integer> {
         this.id = id;
     }
 
+    @JsonIgnore
     public boolean isNew() {
         return getId() == null;
     }
