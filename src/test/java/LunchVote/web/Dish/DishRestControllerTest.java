@@ -1,22 +1,11 @@
 package LunchVote.web.Dish;
 
-import LunchVote.AbstractTest;
+import LunchVote.AbstractRestTest;
 import LunchVote.model.Dish;
 import LunchVote.service.DishService;
-import LunchVote.web.Json.JacksonObjectMapper;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
-
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
@@ -34,36 +23,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by evgeniy on 02.06.2017.
  */
 
-@ContextConfiguration({
-        "classpath:spring/spring-mvc.xml"
-})
-@WebAppConfiguration
-@Transactional
-public class DishRestControllerTest extends AbstractTest {
+public class DishRestControllerTest extends AbstractRestTest {
+    private static final String REST_URL = DishRestController.DISH_REST_URL + "/";
 
-    private static final String REST_URL = DishRestController.REST_URL + "/";
-
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
-
-    private MockMvc mockMvc;
-
-    @PostConstruct
-    private void postConstruct() {
-        mockMvc = MockMvcBuilders
-                .webAppContextSetup(webApplicationContext)
-                .addFilter(CHARACTER_ENCODING_FILTER)
-                //.apply(springSecurity())
-                .build();
-    }
 
     @Autowired
     private DishService service;
-
-    ObjectMapper mapper = JacksonObjectMapper.getMapper();
 
     @Test
     public void testGet() throws Exception {
@@ -96,7 +61,6 @@ public class DishRestControllerTest extends AbstractTest {
     }
 
 
-
     @Test
     public void delete() throws Exception {
         service.delete(DISH1.getId());
@@ -113,9 +77,9 @@ public class DishRestControllerTest extends AbstractTest {
         assertEquals(Arrays.asList(DISH4, DISH5).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
     }
 
-    @Test
+    /*@Test
     public void getAll() throws Exception {
         assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1).toString(), service.getAll().toString());
-    }
+    }*/
 
 }

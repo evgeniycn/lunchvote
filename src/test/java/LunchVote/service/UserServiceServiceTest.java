@@ -1,6 +1,6 @@
 package LunchVote.service;
 
-import LunchVote.AbstractTest;
+import LunchVote.AbstractServiceTest;
 import LunchVote.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by evgeniy on 02.06.2017.
  */
-public class UserServiceTest extends AbstractTest {
+public class UserServiceServiceTest extends AbstractServiceTest {
 
     @Autowired
     private UserService service;

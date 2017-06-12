@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static LunchVote.web.Dish.DishRestController.REST_URL;
+import static LunchVote.web.Dish.DishRestController.DISH_REST_URL;
 
 /**
  * Created by evgeniy on 10.05.2017.
  */
 @RestController
-@RequestMapping(value = REST_URL, produces = MediaType.APPLICATION_JSON_VALUE )
+@RequestMapping(value = DISH_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishRestController {
 
-    static final String REST_URL = "/rest/dishes";
+    static final String DISH_REST_URL = "/rest/dishes";
 
     private DishService service;
 
@@ -48,6 +48,7 @@ public class DishRestController {
         return service.save(dish);
     }
 
+    @DeleteMapping
     public void delete (@PathVariable("id") int id) {
         service.delete(id);
     }

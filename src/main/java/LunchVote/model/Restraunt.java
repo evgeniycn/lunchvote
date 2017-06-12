@@ -39,10 +39,7 @@ public class Restraunt extends BaseEntity {
     }
 
     public Restraunt(String name, LocalDate updateDate, List<Dish> dishList) {
-        super();
-        this.name = name;
-        this.updateDate = updateDate;
-        this.dishList = dishList;
+        this(null, name, updateDate, dishList);
     }
 
     public Restraunt(Integer id, String name, LocalDate updateDate, List<Dish> dishList) {

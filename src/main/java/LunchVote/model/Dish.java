@@ -1,7 +1,6 @@
 package LunchVote.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -48,13 +47,9 @@ public class Dish extends BaseEntity {
 
     }
 
-    /*public Dish(String name, double price, LocalDate date, int restrauntId) {
-        super();
-        this.name = name;
-        this.price = price;
-        this.date = date;
-        this.restrauntId = restrauntId;
-    }*/
+    public Dish(String name, double price, LocalDate date, int restrauntId) {
+        this(null,name, price, date, restrauntId);
+    }
 
     public Dish(Integer id, String name, double price, LocalDate date, int restrauntId) {
         super(id);
