@@ -2,6 +2,7 @@ package LunchVote;
 
 import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
+import LunchVote.service.RestrauntService;
 import LunchVote.web.Dish.DishRestController;
 import LunchVote.web.Restraunt.RestrauntRestController;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -24,6 +25,8 @@ public class Main {
             //JpaDishRepositoryImpl rep = ctx.getBean(JpaDishRepositoryImpl.class);
 
             RestrauntRestController restController = ctx.getBean(RestrauntRestController.class);
+
+            RestrauntService service = ctx.getBean(RestrauntService.class);
 
             List<Dish> dishList = dishController.getByDate(LocalDate.of(2015, Month.MAY, 31));
 
@@ -52,6 +55,12 @@ public class Main {
             }
             System.out.println("<---------------Done--------------->");
             System.out.println();
+
+            List<Restraunt> restraunts = service.getAll();
+
+            for (Restraunt restraunt : restraunts) {
+                System.out.println(restraunt.getVotes().toString());
+            }
 
             System.out.println("FFF");
             //System.out.println(dish.getName());

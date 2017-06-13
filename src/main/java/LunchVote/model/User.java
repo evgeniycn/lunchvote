@@ -1,6 +1,9 @@
 package LunchVote.model;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -25,6 +28,12 @@ public class User extends BaseEntity {
 
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
+    @ElementCollection(targetClass=Vote.class)
+//    @Fetch(FetchMode.SUBSELECT)
+    @BatchSize(size = 200)
+    private Set<Vote> votes;
 
     public User() {
     }

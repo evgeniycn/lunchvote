@@ -22,4 +22,8 @@ public interface RestrauntService {
     List<Restraunt> getAll();
 
     List<Restraunt> getAllWithTodayMenu(LocalDate date);
+
+    Restraunt getVotesByDateAndRestrauntId (LocalDate date, int restrauntId);
+
+
 }

@@ -48,4 +48,9 @@ public class RestrauntServiceImpl implements RestrauntService {
     public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
         return restrauntRepository.getAllWithTodayMenu(date);
     }
+
+    @Override
+    public Restraunt getVotesByDateAndRestrauntId(LocalDate date, int restrauntId) {
+        return restrauntRepository.getVotesByDateAndRestrauntId(date, restrauntId);
+    }
 }

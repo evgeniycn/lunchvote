@@ -23,26 +23,26 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
     private RestrauntService service;
 
     @Test
-    public void get() throws Exception {
+    public void testGet() throws Exception {
         assertEquals(RESTRAUNT1.toString(), service.get(100011).toString());
     }
 
     @Test
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         service.delete(100011);
         assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2).toString(),service.getAll().toString());
     }
 
     @Test
-    public void save() throws Exception {
+    public void testSave() throws Exception {
         Restraunt created = getCreated();
-        Restraunt restraunt = service.save(new Restraunt(null, "New restraunt", LocalDate.of(2017, Month.JUNE, 1), Collections.emptyList()));
+        Restraunt restraunt = service.save(new Restraunt(null, "New restraunt", LocalDate.of(2017, Month.JUNE, 1), Collections.emptyList(), 0));
         created.setId(100017);
         assertEquals(created.toString(), restraunt.toString());
     }
 
     @Test
-    public void update() throws Exception {
+    public void testUpdate() throws Exception {
         Restraunt updated = getUpdated();
         Restraunt restraunt = service.get(100011);
 
@@ -54,13 +54,18 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void testGetAll() throws Exception {
         assertEquals(RESTRAUNTS.toString(), service.getAll().toString());
     }
 
     @Test
-    public void getAllWithTodayMenu() throws Exception {
+    public void testGetAllWithTodayMenu() throws Exception {
         assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT2).toString(), service.getAllWithTodayMenu(LocalDate.of(2015, Month.MAY, 31)).toString());
+    }
+
+    @Test
+    public void testGetVotesByDate() throws Exception {
+        assertEquals(RESTRAUNT2.toString(), service.getVotesByDateAndRestrauntId(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
     }
 
 }
