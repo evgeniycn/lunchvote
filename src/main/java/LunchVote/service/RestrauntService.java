@@ -2,9 +2,11 @@ package LunchVote.service;
 
 import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
+import LunchVote.model.Vote;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -25,5 +27,5 @@ public interface RestrauntService {
 
     Restraunt getVotesByDateAndRestrauntId (LocalDate date, int restrauntId);
 
-
+    Map<Integer, Integer> getAllWithVotesByDate(LocalDate date);
 }

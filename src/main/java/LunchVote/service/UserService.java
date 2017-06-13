@@ -1,8 +1,10 @@
 package LunchVote.service;
 
 import LunchVote.model.User;
+import LunchVote.model.Vote;
 import LunchVote.util.exception.NotFoundException;
 
+import javax.naming.TimeLimitExceededException;
 import java.util.List;
 
 /**
@@ -17,4 +19,6 @@ public interface UserService {
     User save (User user);
 
     List<User> getAll();
+
+    void sendVote(Vote vote) throws TimeLimitExceededException;
 }

@@ -3,6 +3,7 @@ package LunchVote.model;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -11,6 +12,8 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = User.DELETE_BY_ID, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.ALL, query = "SELECT u FROM User u ORDER BY u.id DESC"),
+        //@NamedQuery(name = User.VOTE, query = "INSERT INTO VOTES (restraunt_id, user_id, date) VALUES (?, ?, ?)", restrauntId, userId, date),
+        //"INSERT INTO user_roles (user_id, role) VALUES (?, ?)", roles, roles.size()
 })
 @Entity
 @Table(name = "USERS", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
@@ -19,6 +22,7 @@ public class User extends BaseEntity {
 
     public static final String ALL  = "User.getAll";
 
+    //public static final String VOTE = "User.vote";
 
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -29,11 +33,14 @@ public class User extends BaseEntity {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
+    @Column(name = "LAST_VOTE_DATE", nullable = true)
+    private LocalDate lastVoteDate;
+
+    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
     @ElementCollection(targetClass=Vote.class)
 //    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
-    private Set<Vote> votes;
+    private Set<Vote> votes;*/
 
     public User() {
     }
@@ -43,6 +50,7 @@ public class User extends BaseEntity {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.lastVoteDate = null;
     }
 
     public String getName() {
@@ -57,6 +65,10 @@ public class User extends BaseEntity {
         return password;
     }
 
+    public LocalDate getLastVoteDate() {
+        return lastVoteDate;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -69,6 +81,10 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    public void setLastVoteDate(LocalDate lastVoteDate) {
+        this.lastVoteDate = lastVoteDate;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -76,6 +92,7 @@ public class User extends BaseEntity {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", lastVoteDate='" + lastVoteDate + '\'' +
                 '}';
     }
 }

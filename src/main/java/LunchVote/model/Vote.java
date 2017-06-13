@@ -9,37 +9,46 @@ import java.util.Set;
 /**
  * Created by evgeniy on 13.06.2017.
  */
+@NamedQueries({
+        @NamedQuery(name = Vote.DELETE_BY_RESTRAUNT_ID, query = "DELETE FROM Vote v WHERE v.userId=:userId AND v.date=:date"),
+        @NamedQuery(name = Vote.ALL_BY_DATE_WITH_VOTES, query = "SELECT v FROM Vote v WHERE v.date=:date ORDER BY v.date DESC"),
+})
 @Entity
 @Table(name = "VOTES", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Vote extends BaseEntity {
 
-    @OneToMany
-    @JoinColumn(name="USER_ID")
+    public static final String DELETE_BY_RESTRAUNT_ID  = "Vote.deleteByRestrauntId";
+
+    public static final String ALL_BY_DATE_WITH_VOTES = "Vote.getAllByDateWithVotes";
+    /*@OneToMany
+    @JoinColumn(name="USER_ID")*/
     /*@ElementCollection(targetClass = User.class)
     @Fetch(FetchMode.SUBSELECT)*/
-    private Set<User> users;
+    @Column(name = "USER_ID", nullable = false)
+    private Integer userId;
 
     @Column(name = "DATE", nullable = false)
     private LocalDate date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)
+    /*@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)*/
     //@Fetch(FetchMode.SUBSELECT)
-    private Restraunt restraunt;
+    @Column(name = "RESTRAUNT_ID")
+    private Integer restrauntId;
 
     public Vote() {
     }
 
-    public void setRestraunt(Restraunt restraunt) {
-        this.restraunt = restraunt;
+    public void setRestraunt(Integer restrauntId) {
+        this.restrauntId = restrauntId;
     }
 
-    public Restraunt getRestraunt() {
-        return restraunt;
+    public Integer getRestrauntId() {
+        return restrauntId;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Integer getUsers() {
+        return userId;
     }
 
     public LocalDate getDate() {
@@ -50,8 +59,8 @@ public class Vote extends BaseEntity {
         this.restrauntId = restrauntId;
     }*/
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUsers(Integer userId) {
+        this.userId = userId;
     }
 
     public void setDate(LocalDate date) {
@@ -61,9 +70,9 @@ public class Vote extends BaseEntity {
     @Override
     public String toString() {
         return "Vote{" +
-                "users=" + users +
+                "users=" + userId +
                 ", date=" + date +
-                ", restraunt=" + restraunt +
+                ", restraunt=" + restrauntId +
                 '}';
     }
 }

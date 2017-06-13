@@ -2,13 +2,16 @@ package LunchVote.service;
 
 import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
+import LunchVote.model.Vote;
 import LunchVote.repository.RestrauntRepositoy;
 import LunchVote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -52,5 +55,15 @@ public class RestrauntServiceImpl implements RestrauntService {
     @Override
     public Restraunt getVotesByDateAndRestrauntId(LocalDate date, int restrauntId) {
         return restrauntRepository.getVotesByDateAndRestrauntId(date, restrauntId);
+    }
+
+    @Override
+    public Map<Integer, Integer> getAllWithVotesByDate(LocalDate date) {
+        Map<Integer, Integer> votesResultByDate = new HashMap<>();
+        List<Vote> votesByDate = restrauntRepository.getAllWithVotesByDate(date);
+        for (Vote vote : votesByDate) {
+            votesResultByDate.merge(vote.getRestrauntId(), 1, (oldValue, one) -> oldValue + one);
+        }
+        return votesResultByDate;
     }
 }

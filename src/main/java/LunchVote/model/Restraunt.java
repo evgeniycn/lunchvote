@@ -21,6 +21,7 @@ import java.util.Set;
         @NamedQuery(name = Restraunt.DELETE_BY_ID, query = "DELETE FROM Restraunt r WHERE r.id=:id"),
         @NamedQuery(name = Restraunt.ALL, query = "SELECT r FROM Restraunt r ORDER BY r.id DESC"),
         @NamedQuery(name = Restraunt.VOTES_BY_DATE_RESTRAUNT_ID, query = "SELECT r FROM Restraunt r WHERE r.updateDate=:date AND r.id=:id ORDER BY r.id DESC"),
+        @NamedQuery(name = Restraunt.ALL_BY_DATE_WITH_VOTES, query = "SELECT r FROM Restraunt r WHERE r.updateDate=:date AND r.id=:id ORDER BY r.id DESC"),
 })
 
 @Entity
@@ -34,6 +35,8 @@ public class Restraunt extends BaseEntity {
     public static final String DELETE_BY_ID = "Restraunt.deleteById";
 
     public static final String VOTES_BY_DATE_RESTRAUNT_ID = "Restraunt.getVotesByDateRestrauntId";
+
+    public static final String ALL_BY_DATE_WITH_VOTES = "Restraunt.getAllByDateWithVotes";
 
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -51,23 +54,23 @@ public class Restraunt extends BaseEntity {
 
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
+    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
     @ElementCollection(targetClass=Integer.class)
 //    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
-    private Set<Vote> votes;
+    private Set<Vote> votes;*/
 
     public Restraunt() {
 
     }
 
-    public Set<Vote> getVotes() {
+    /*public Set<Vote> getVotes() {
         return votes;
     }
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
-    }
+    }*/
 
     public Restraunt(String name, LocalDate updateDate, List<Dish> dishList) {
         this(null, name, updateDate, dishList, 0);

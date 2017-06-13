@@ -1,12 +1,15 @@
 package LunchVote.repository.jpa;
 
+import LunchVote.AuthorizedUser;
 import LunchVote.model.User;
+import LunchVote.model.Vote;
 import LunchVote.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -46,5 +49,21 @@ public class JpaUserRepositoryImpl implements UserRepository {
     public List<User> getAll() {
         return em.createNamedQuery(User.ALL, User.class)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public Vote sendVote(Vote vote) {
+        if (get(AuthorizedUser.id()).getLastVoteDate() == null || !get(AuthorizedUser.id()).getLastVoteDate().equals(LocalDate.now())) {
+            em.persist(vote);
+            return vote;
+        }
+        else {
+            em.createNamedQuery(Vote.DELETE_BY_RESTRAUNT_ID)
+                    .setParameter("userId", AuthorizedUser.id())
+                    .setParameter("date", LocalDate.now())
+                    .executeUpdate();
+            return em.merge(vote);
+        }
     }
 }

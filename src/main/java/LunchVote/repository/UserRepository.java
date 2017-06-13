@@ -1,6 +1,7 @@
 package LunchVote.repository;
 
 import LunchVote.model.User;
+import LunchVote.model.Vote;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserRepository {
     User save(User user);
 
     List<User> getAll();
+
+    Vote sendVote(Vote vote);
 }

@@ -1,6 +1,7 @@
 package LunchVote.repository.jpa;
 
 import LunchVote.model.Restraunt;
+import LunchVote.model.Vote;
 import LunchVote.repository.RestrauntRepositoy;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,5 +64,12 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepositoy {
                 .setParameter("date", date)
                 .setParameter("id", restrauntId)
                 .getSingleResult();
+    }
+
+    @Override
+    public List<Vote> getAllWithVotesByDate(LocalDate date) {
+        return  em.createNamedQuery(Vote.ALL_BY_DATE_WITH_VOTES, Vote.class)
+                .setParameter("date", date)
+                .getResultList();
     }
 }

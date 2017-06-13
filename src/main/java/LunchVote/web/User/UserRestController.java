@@ -27,17 +27,17 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/{id}")
-    public User get (@PathVariable("id") int id) {
+    public User get(@PathVariable("id") int id) {
         return service.get(id);
     }
 
     @DeleteMapping
-    public void delete (@PathVariable("id") int id) {
+    public void delete(@PathVariable("id") int id) {
         service.delete(id);
     }
 
     @PostMapping
-    public User save (@RequestBody User user) {
+    public User save(@RequestBody User user) {
         return service.save(user);
     }
 

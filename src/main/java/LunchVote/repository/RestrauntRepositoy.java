@@ -2,6 +2,7 @@ package LunchVote.repository;
 
 import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
+import LunchVote.model.Vote;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -25,4 +26,6 @@ public interface RestrauntRepositoy {
     List<Restraunt> getAllWithTodayMenu(LocalDate date);
 
     Restraunt getVotesByDateAndRestrauntId(LocalDate date, int restrauntId);
+
+    List<Vote> getAllWithVotesByDate(LocalDate date);
 }
