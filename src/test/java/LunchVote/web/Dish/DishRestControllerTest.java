@@ -1,23 +1,31 @@
 package LunchVote.web.Dish;
 
 import LunchVote.AbstractRestTest;
+import LunchVote.TestUtil;
 import LunchVote.model.Dish;
 import LunchVote.service.DishService;
+import LunchVote.web.Json.JacksonObjectMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 
+import static LunchVote.TestUtil.userHttpBasic;
+import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static LunchVote.DishTestData.*;
 import static LunchVote.DishTestData.DISH1;
 import static LunchVote.DishTestData.DISH2;
+import static LunchVote.UserTestData.USER1;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 /**
  * Created by evgeniy on 02.06.2017.
@@ -32,7 +40,8 @@ public class DishRestControllerTest extends AbstractRestTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + DISH1_ID))
+        mockMvc.perform(get(REST_URL + DISH1_ID)
+                .with(userHttpBasic(USER1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -40,46 +49,62 @@ public class DishRestControllerTest extends AbstractRestTest {
     }
 
     @Test
-    public void save() throws Exception {
-        Dish created = getCreated();
-        Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100010));
-        created.setId(100017);
-        assertEquals(created.toString(), dish.toString());
-    }
-
-    @Test
-    public void update() throws Exception {
-        Dish updated = getUpdated();
-        Dish dish = service.get(100005);
-
-        dish.setName(updated.getName());
-        dish.setDate(updated.getDate());
-        dish.setPrice(updated.getPrice());
-        dish.setRestrauntId(updated.getRestrauntId());
-
-        assertEquals(updated.toString(), dish.toString());
-    }
-
-
-    @Test
-    public void delete() throws Exception {
-        service.delete(DISH1.getId());
-        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2).toString(), service.getAll().toString());
-    }
-
-    @Test
     public void getByDate() throws Exception {
-        assertEquals(Arrays.asList(DISH6, DISH5, DISH4).toString(), service.getByDate(LocalDate.of(2015, Month.MAY, 31)).toString());
+        mockMvc.perform(get(REST_URL + "/date/2015-05-31")
+                .with(userHttpBasic(USER1)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(DISH6, DISH5, DISH4))));
     }
 
     @Test
     public void getByDateRestrauntID() throws Exception {
-        assertEquals(Arrays.asList(DISH4, DISH5).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
+        mockMvc.perform(get(REST_URL + "/date/2015-05-30/restraunt/100011")
+                .with(userHttpBasic(USER1)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(DISH3, DISH2, DISH1))));
     }
 
-    /*@Test
-    public void getAll() throws Exception {
-        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1).toString(), service.getAll().toString());
-    }*/
+    @Test
+    public void testCreate() throws Exception {
+        Dish created = getCreated();
 
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString((created)))
+                .with(userHttpBasic(USER1)))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+
+        Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
+        created.setId(returned.getId());
+
+        assertEquals(created.toString(), returned.toString());
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        Dish updated = getUpdated();
+
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString((updated)))
+                .with(userHttpBasic(USER1)))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+
+        Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
+
+        assertEquals(updated.toString(), updated.toString());
+    }
+
+
+    @Test
+    public void testDelete() throws Exception {
+        mockMvc.perform(delete(REST_URL + DISH1_ID)
+                .with(userHttpBasic(USER1)))
+                .andExpect(status().isOk());
+        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2).toString(), service.getAll().toString());
+    }
 }

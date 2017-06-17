@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static LunchVote.web.Restraunt.RestrauntRestController.RESTRAUNT_REST_URL;
 
@@ -28,13 +29,13 @@ public class RestrauntRestController {
         this.service = service;
     }
 
-    @GetMapping (value = "/{id}")
+    @GetMapping(value = "/{id}")
     public Restraunt get(@PathVariable("id") int id) {
         return service.get(id);
     }
 
-    @DeleteMapping
-    public void delete (@PathVariable("id") int id) {
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable("id") int id) {
         service.delete(id);
     }
 
@@ -48,9 +49,14 @@ public class RestrauntRestController {
         return service.getAll();
     }
 
-    @GetMapping (value = "/date/{date}")
+    @GetMapping(value = "/date/{date}")
     public List<Restraunt> getAllWithTodayMenu(@PathVariable("date") LocalDate date) {
         return service.getAllWithTodayMenu(date);
+    }
+
+    @GetMapping(value = "/votes/{date}")
+    public Map<Integer, Integer> getAllWithVotesByDate(@PathVariable("date") LocalDate date) {
+        return service.getAllWithVotesByDate(date);
     }
 
 }

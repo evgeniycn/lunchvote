@@ -2,6 +2,7 @@ DELETE FROM users;
 DELETE FROM user_roles;
 DELETE FROM dishes;
 DELETE FROM restraunts;
+DELETE FROM VOTES;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO USERS (name, email, password) VALUES
@@ -13,7 +14,11 @@ INSERT INTO USERS (name, email, password) VALUES
 
 INSERT INTO USER_ROLES (role, user_id) VALUES
   ('ROLE_USER', 100000),
-  ('ROLE_ADMIN', 100001);
+  ('ROLE_USER', 100001),
+  ('ROLE_USER', 100002),
+  ('ROLE_ADMIN', 100003),
+  ('ROLE_ADMIN', 100004),
+  ('ROLE_USER', 100004);
 
 INSERT INTO DISHES (name, date, price, restraunt_id) VALUES
   ('Borsh','2015-05-30', 100.00, 100011),
@@ -23,13 +28,14 @@ INSERT INTO DISHES (name, date, price, restraunt_id) VALUES
   ('Sandwich','2015-05-31', 55.50, 100012),
   ('Jarkoe', '2015-05-31', 100.00, 100013);
 
-INSERT INTO RESTRAUNTS (name, update_date, votes) VALUES
-  ('Restraunt1', '2015-05-30', 0),
-  ('Restraunt2', '2015-05-31', 5),
-  ('Restraunt3', '2015-05-30', 2),
-  ('Restraunt4', '2015-05-31', 1),
-  ('Restraunt5', '2015-05-31', 7),
-  ('Restraunt6', '2015-05-31', 0);
+INSERT INTO RESTRAUNTS (name, update_date) VALUES
+  /*('Restraunt1', '2015-05-30'),*/
+  ('Restraunt1', '2017-06-17'),
+  ('Restraunt2', '2015-05-31'),
+  ('Restraunt3', '2015-05-30'),
+  ('Restraunt4', '2015-05-31'),
+  ('Restraunt5', '2015-05-31'),
+  ('Restraunt6', '2015-05-31');
 
 INSERT INTO VOTES (restraunt_id, user_id, date) VALUES
   (100011, 100000, '2015-05-31'),

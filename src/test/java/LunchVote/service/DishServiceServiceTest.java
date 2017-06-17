@@ -29,7 +29,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
     public void save() throws Exception {
         Dish created = getCreated();
         Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100010));
-        created.setId(100017);
+        created.setId(100026);
         assertEquals(created.toString(), dish.toString());
     }
 

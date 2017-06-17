@@ -1,4 +1,4 @@
-package LunchVote.repository.jpa;
+package LunchVote.repository;
 
 import LunchVote.model.Dish;
 import LunchVote.repository.DishRepository;

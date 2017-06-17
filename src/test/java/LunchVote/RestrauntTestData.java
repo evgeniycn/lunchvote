@@ -22,22 +22,22 @@ public class RestrauntTestData {
     public static final int RESTRAUNT1_ID = START_SEQ + 11;
     //public static final int ADMIN_MEAL_ID = START_SEQ + 8;
 
-    public static final Restraunt RESTRAUNT1 = new Restraunt(RESTRAUNT1_ID, "Restraunt1", of(2015, Month.MAY, 30), Arrays.asList(DISH3, DISH2, DISH1), 0);
-    public static final Restraunt RESTRAUNT2 = new Restraunt(RESTRAUNT1_ID + 1, "Restraunt2", of(2015, Month.MAY, 31), Arrays.asList(DISH5, DISH4), 5);
-    public static final Restraunt RESTRAUNT3 = new Restraunt(RESTRAUNT1_ID + 2, "Restraunt3", of(2015, Month.MAY, 30), Collections.singletonList(DISH6), 2);
-    public static final Restraunt RESTRAUNT4 = new Restraunt(RESTRAUNT1_ID + 3, "Restraunt4", of(2015, Month.MAY, 31), Collections.emptyList(), 1);
-    public static final Restraunt RESTRAUNT5 = new Restraunt(RESTRAUNT1_ID + 4, "Restraunt5", of(2015, Month.MAY, 31), Collections.emptyList(), 7);
-    public static final Restraunt RESTRAUNT6 = new Restraunt(RESTRAUNT1_ID + 5, "Restraunt6", of(2015, Month.MAY, 31), Collections.emptyList(), 0);
+    public static final Restraunt RESTRAUNT1 = new Restraunt(RESTRAUNT1_ID, "Restraunt1", of(2015, Month.MAY, 30), Arrays.asList(DISH3, DISH2, DISH1));
+    public static final Restraunt RESTRAUNT2 = new Restraunt(RESTRAUNT1_ID + 1, "Restraunt2", of(2015, Month.MAY, 31), Arrays.asList(DISH5, DISH4));
+    public static final Restraunt RESTRAUNT3 = new Restraunt(RESTRAUNT1_ID + 2, "Restraunt3", of(2015, Month.MAY, 30), Collections.singletonList(DISH6));
+    public static final Restraunt RESTRAUNT4 = new Restraunt(RESTRAUNT1_ID + 3, "Restraunt4", of(2015, Month.MAY, 31), Collections.emptyList());
+    public static final Restraunt RESTRAUNT5 = new Restraunt(RESTRAUNT1_ID + 4, "Restraunt5", of(2015, Month.MAY, 31), Collections.emptyList());
+    public static final Restraunt RESTRAUNT6 = new Restraunt(RESTRAUNT1_ID + 5, "Restraunt6", of(2015, Month.MAY, 31), Collections.emptyList());
 
 
     public static final List<Restraunt> RESTRAUNTS = Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1);
 
     public static Restraunt getCreated() {
-        return new Restraunt(null, "New restraunt", of(2017, Month.JUNE, 1), Collections.emptyList(), 0);
+        return new Restraunt(null, "New restraunt", of(2017, Month.JUNE, 1), Collections.emptyList());
     }
 
     public static Restraunt getUpdated() {
-        return new Restraunt(RESTRAUNT1_ID, "Updated restraunt", of(2017, Month.AUGUST, 22), Arrays.asList(DISH3, DISH2), 0);
+        return new Restraunt(RESTRAUNT1_ID, "Updated restraunt", of(2017, Month.AUGUST, 22), Arrays.asList(DISH3, DISH2));
     }
 }
 /*

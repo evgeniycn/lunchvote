@@ -30,10 +30,10 @@ public class Main {
 
             Vote vote = new Vote();
             vote.setDate(LocalDate.now());
-            vote.setRestraunt(100013);
-            vote.setUsers(100000);
+            vote.setRestrauntId(100013);
+            vote.setUserId(100000);
             try {
-                service.sendVote(vote);
+                service.sendVote(100013);
             } catch (TimeLimitExceededException e) {
                 e.printStackTrace();
             }

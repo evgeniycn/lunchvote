@@ -20,34 +20,20 @@ public class Vote extends BaseEntity {
     public static final String DELETE_BY_RESTRAUNT_ID  = "Vote.deleteByRestrauntId";
 
     public static final String ALL_BY_DATE_WITH_VOTES = "Vote.getAllByDateWithVotes";
-    /*@OneToMany
-    @JoinColumn(name="USER_ID")*/
-    /*@ElementCollection(targetClass = User.class)
-    @Fetch(FetchMode.SUBSELECT)*/
+
     @Column(name = "USER_ID", nullable = false)
     private Integer userId;
 
     @Column(name = "DATE", nullable = false)
     private LocalDate date;
 
-    /*@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)*/
-    //@Fetch(FetchMode.SUBSELECT)
     @Column(name = "RESTRAUNT_ID")
     private Integer restrauntId;
 
     public Vote() {
     }
 
-    public void setRestraunt(Integer restrauntId) {
-        this.restrauntId = restrauntId;
-    }
-
-    public Integer getRestrauntId() {
-        return restrauntId;
-    }
-
-    public Integer getUsers() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -55,16 +41,20 @@ public class Vote extends BaseEntity {
         return date;
     }
 
-    /*public void setRestrauntId(int restrauntId) {
-        this.restrauntId = restrauntId;
-    }*/
+    public Integer getRestrauntId() {
+        return restrauntId;
+    }
 
-    public void setUsers(Integer userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public void setRestrauntId(Integer restrauntId) {
+        this.restrauntId = restrauntId;
     }
 
     @Override

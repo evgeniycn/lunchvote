@@ -10,7 +10,7 @@ import java.time.LocalDate;
  */
 @NamedQueries({
         @NamedQuery(name = Dish.ALL_BY_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date ORDER BY d.id DESC"),
-        @NamedQuery(name = Dish.ALL_BY_DATE_RESTRAUNT_ID, query = "SELECT d FROM Dish d WHERE d.date=:date AND d.restrauntId=:restrauntId  ORDER BY d.restrauntId DESC"),
+        @NamedQuery(name = Dish.ALL_BY_DATE_RESTRAUNT_ID, query = "SELECT d FROM Dish d WHERE d.date=:date AND d.restrauntId=:restrauntId  ORDER BY d.id DESC"),
         @NamedQuery(name = Dish.DELETE_BY_ID, query = "DELETE FROM Dish d WHERE d.id=:id"),
         @NamedQuery(name = Dish.ALL, query = "SELECT d FROM Dish d ORDER BY d.id DESC"),
 })

@@ -1,6 +1,7 @@
 package LunchVote.model;
 
-import org.hibernate.annotations.*;
+
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -25,7 +25,7 @@ import java.util.Set;
 })
 
 @Entity
-@Table (name = "RESTRAUNTS", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
+@Table(name = "RESTRAUNTS", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Restraunt extends BaseEntity {
 
     public static final String ALL_BY_TODAY = "Restraunt.getByToday";
@@ -49,43 +49,29 @@ public class Restraunt extends BaseEntity {
     @OrderBy("id DESC")
     private List<Dish> dishList;
 
-    @Column(name = "votes", nullable = false)
-    private int votesByDate;
 
-
-
-    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
-    @ElementCollection(targetClass=Integer.class)
+    /*@Enumerated(EnumType.STRING)
+    @CollectionTable(name = "votes", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
 //    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
-    private Set<Vote> votes;*/
+    private Map<LocalDate, Integer> votesByDate;*/
 
     public Restraunt() {
 
     }
 
-    /*public Set<Vote> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Set<Vote> votes) {
-        this.votes = votes;
-    }*/
 
     public Restraunt(String name, LocalDate updateDate, List<Dish> dishList) {
-        this(null, name, updateDate, dishList, 0);
+        this(null, name, updateDate, dishList);
     }
 
-    public Restraunt(Integer id, String name, LocalDate updateDate, List<Dish> dishList, int votesByDate) {
+    public Restraunt(Integer id, String name, LocalDate updateDate, List<Dish> dishList) {
         super(id);
         this.name = name;
         this.updateDate = updateDate;
         this.dishList = dishList;
-        this.votesByDate = votesByDate;
-    }
-
-    public int getVotesByDate() {
-        return votesByDate;
     }
 
     public String getName() {
@@ -112,9 +98,6 @@ public class Restraunt extends BaseEntity {
         this.dishList = dishList;
     }
 
-    public void setVotesByDate(int votesByDate) {
-        this.votesByDate = votesByDate;
-    }
 
     @Override
     public String toString() {
@@ -123,7 +106,6 @@ public class Restraunt extends BaseEntity {
                 "name='" + name + '\'' +
                 ", updateDate=" + updateDate +
                 ", dishList=" + dishList +
-                ", votesByDate=" + votesByDate +
                 '}';
     }
 

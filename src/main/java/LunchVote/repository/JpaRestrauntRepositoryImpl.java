@@ -1,8 +1,7 @@
-package LunchVote.repository.jpa;
+package LunchVote.repository;
 
 import LunchVote.model.Restraunt;
 import LunchVote.model.Vote;
-import LunchVote.repository.RestrauntRepositoy;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +15,7 @@ import java.util.List;
  */
 @Repository
 @Transactional(readOnly = true)
-public class JpaRestrauntRepositoryImpl implements RestrauntRepositoy {
+public class JpaRestrauntRepositoryImpl implements RestrauntRepository {
 
     @PersistenceContext
     private EntityManager em;

@@ -13,6 +13,8 @@ public interface UserRepository {
 
     User get(int id);
 
+    User getByEmail(String email);
+
     boolean delete(int id);
 
     User save(User user);

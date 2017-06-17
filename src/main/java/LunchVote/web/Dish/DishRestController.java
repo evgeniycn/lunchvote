@@ -28,28 +28,28 @@ public class DishRestController {
     }
 
     @GetMapping(value = "/{id}")
-    public Dish get (@PathVariable("id") int id) {
+    public Dish get(@PathVariable("id") int id) {
         Dish dish = service.get(id);
         return dish;
     }
 
     @GetMapping(value = "/date/{date}")
-    public List<Dish> getByDate (@PathVariable("date") LocalDate date){
+    public List<Dish> getByDate(@PathVariable("date") LocalDate date) {
         return service.getByDate(date);
     }
 
     @GetMapping(value = "/date/{date}/restraunt/{id}")
-    public List<Dish> getByDateRestrauntId (@PathVariable("date") LocalDate date, @PathVariable("id") int restrauntId) {
+    public List<Dish> getByDateRestrauntId(@PathVariable("date") LocalDate date, @PathVariable("id") int restrauntId) {
         return service.getByDateRestrauntID(date, restrauntId);
     }
 
     @PostMapping
-    public Dish save (@RequestBody Dish dish) {
+    public Dish save(@RequestBody Dish dish) {
         return service.save(dish);
     }
 
-    @DeleteMapping
-    public void delete (@PathVariable("id") int id) {
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable("id") int id) {
         service.delete(id);
     }
 }

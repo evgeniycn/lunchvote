@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.TimeLimitExceededException;
 import java.util.List;
 
 import static LunchVote.web.User.UserRestController.USER_REST_URL;
@@ -31,7 +32,7 @@ public class UserRestController {
         return service.get(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") int id) {
         service.delete(id);
     }
@@ -44,6 +45,11 @@ public class UserRestController {
     @GetMapping
     public List<User> getAll() {
         return service.getAll();
+    }
+
+    @GetMapping(value = "/vote/{id}")
+    public boolean sendVote(@PathVariable("id") int id) throws TimeLimitExceededException {
+        return service.sendVote(id);
     }
 
 }

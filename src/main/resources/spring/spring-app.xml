@@ -5,8 +5,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <import resource="spring-security.xml"/>
+
     <context:annotation-config/>
     <context:component-scan base-package="LunchVote.**.service"/>
 
+    <!--Check why we need 2 package bellow:-->
+    <context:component-scan base-package="LunchVote.**.repository"/>
     <context:component-scan base-package="LunchVote.**.web"/>
+
 </beans>

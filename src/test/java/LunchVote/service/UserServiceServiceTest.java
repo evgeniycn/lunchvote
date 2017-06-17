@@ -1,6 +1,7 @@
 package LunchVote.service;
 
 import LunchVote.AbstractServiceTest;
+import LunchVote.model.Role;
 import LunchVote.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class UserServiceServiceTest extends AbstractServiceTest {
     @Test
     public void save() throws Exception {
         User user = getCreated();
-        user.setId(100017);
-        User created = service.save(new User(null, "New user", "new_user@gmail.com", "new_user_password"));
+        user.setId(100026);
+        User created = service.save(new User(null, "New user", "new_user@gmail.com", "new_user_password", Role.ROLE_USER));
         assertEquals(user.toString(), created.toString());
     }
 

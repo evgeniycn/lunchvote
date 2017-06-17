@@ -14,11 +14,13 @@ public interface UserService {
 
     User get(int id);
 
+    User getByEmail(String email);
+
     void delete(int id) throws NotFoundException;
 
     User save (User user);
 
     List<User> getAll();
 
-    void sendVote(Vote vote) throws TimeLimitExceededException;
+    boolean sendVote(int restrauntId) throws TimeLimitExceededException;
 }

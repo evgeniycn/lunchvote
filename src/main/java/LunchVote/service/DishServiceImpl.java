@@ -2,6 +2,7 @@ package LunchVote.service;
 
 import LunchVote.model.Dish;
 import LunchVote.repository.DishRepository;
+import LunchVote.repository.RestrauntRepository;
 import LunchVote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +17,29 @@ import java.util.List;
 public class DishServiceImpl implements DishService {
 
     private final DishRepository dishRepository;
+    private final RestrauntRepository restrauntRepository;
 
     @Autowired
-    public DishServiceImpl(DishRepository dishRepository) {
+    public DishServiceImpl(DishRepository dishRepository, RestrauntRepository restrauntRepository) {
         this.dishRepository = dishRepository;
+        this.restrauntRepository = restrauntRepository;
     }
 
-
+    @Override
     public Dish get(int id) throws NotFoundException {
         return dishRepository.get(id);
     }
 
+    @Override
     public Dish save(Dish dish) {
+        LocalDate dishDate = dish.getDate();
+        if (restrauntRepository.get(dish.getRestrauntId()) == null || !restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate().isBefore(dishDate)) {
+            restrauntRepository.get(dish.getRestrauntId()).setUpdatedDate(dishDate);
+        }
         return dishRepository.save(dish);
     }
 
+    @Override
     public void delete(int id) throws NotFoundException {
         dishRepository.delete(id);
     }
