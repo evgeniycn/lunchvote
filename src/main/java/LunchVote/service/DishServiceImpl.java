@@ -1,6 +1,7 @@
 package LunchVote.service;
 
 import LunchVote.model.Dish;
+import LunchVote.model.Vote;
 import LunchVote.repository.DishRepository;
 import LunchVote.repository.RestrauntRepository;
 import LunchVote.util.exception.NotFoundException;
@@ -33,10 +34,19 @@ public class DishServiceImpl implements DishService {
     @Override
     public Dish save(Dish dish) {
         LocalDate dishDate = dish.getDate();
-        if (restrauntRepository.get(dish.getRestrauntId()) == null || !restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate().isBefore(dishDate)) {
-            restrauntRepository.get(dish.getRestrauntId()).setUpdatedDate(dishDate);
+
+        List<Vote> allWithVotesByDate = restrauntRepository.getAllWithVotesByDate(dishDate);
+        for (Vote vote : allWithVotesByDate) {
+            if (vote.getRestrauntId() != null) {
+                throw new UnsupportedOperationException("Someone already voted for this restraunt today, menu cannot be changed");
+            }
         }
-        return dishRepository.save(dish);
+
+        if (restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate() == null || restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate().isBefore(dishDate)) {
+            dish = dishRepository.save(dish);
+        }
+        return dish;
+
     }
 
     @Override

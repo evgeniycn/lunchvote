@@ -22,5 +22,5 @@ public interface UserService {
 
     List<User> getAll();
 
-    boolean sendVote(int restrauntId) throws TimeLimitExceededException;
+    Vote sendVote(int restrauntId) throws TimeLimitExceededException;
 }

@@ -1,6 +1,7 @@
 package LunchVote.web.User;
 
 import LunchVote.model.User;
+import LunchVote.model.Vote;
 import LunchVote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -48,7 +49,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/vote/{id}")
-    public boolean sendVote(@PathVariable("id") int id) throws TimeLimitExceededException {
+    public Vote sendVote(@PathVariable("id") int id) throws TimeLimitExceededException {
         return service.sendVote(id);
     }
 

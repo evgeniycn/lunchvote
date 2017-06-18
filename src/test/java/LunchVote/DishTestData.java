@@ -3,6 +3,7 @@ package LunchVote;
 
 import LunchVote.model.Dish;
 
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +22,7 @@ public class DishTestData {
     public static final int DISH1_ID = START_SEQ + 5;
     //public static final int ADMIN_MEAL_ID = START_SEQ + 8;
 
-    public static final Dish DISH1 = new Dish(DISH1_ID, "Borsh", 100.00, of(2015, Month.MAY, 30), 100011);
+    public static final Dish DISH1 = new Dish(DISH1_ID, "Borsh", 100.00, LocalDate.now(), 100011);
     public static final Dish DISH2 = new Dish(DISH1_ID + 1, "Salat", 50.00, of(2015, Month.MAY, 30), 100011);
     public static final Dish DISH3 = new Dish(DISH1_ID + 2, "Macaroni", 80.00, of(2015, Month.MAY, 30), 100011);
     public static final Dish DISH4 = new Dish(DISH1_ID + 3, "Soup", 50.00, of(2015, Month.MAY, 31), 100012);
@@ -32,7 +33,7 @@ public class DishTestData {
     public static final List<Dish> DISHES = Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1);
 
     public static Dish getCreated() {
-        return new Dish(null, "Created dish", 1.00, of(2015, Month.JUNE, 1), 100010);
+        return new Dish(null, "Created dish", 1.00, of(2015, Month.JUNE, 1), 100011);
     }
 
     public static Dish getUpdated() {

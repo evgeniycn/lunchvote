@@ -22,7 +22,7 @@ public class UserTestData {
     public static final User USER3 = new User(USER1_ID + 2, "User3", "user3@user.com", "password3", Role.ROLE_USER);
 
     public static final User ADMIN1 = new User(USER1_ID + 3, "Admin1", "admin1@gmail.com", "admin1", Role.ROLE_ADMIN);
-    public static final User ADMIN2 = new User(USER1_ID + 4, "Admin2", "admin2@gmail.com", "admin2", Arrays.asList(Role.ROLE_USER, Role.ROLE_ADMIN));
+    public static final User ADMIN2 = new User(USER1_ID + 4, "Admin2", "admin2@gmail.com", "admin2", Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_USER));
 
 
 

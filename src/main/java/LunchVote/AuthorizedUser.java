@@ -4,6 +4,10 @@ import LunchVote.model.BaseEntity;
 import LunchVote.model.User;
 import LunchVote.to.UserTo;
 import LunchVote.util.UserUtil;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -18,7 +22,43 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         this.userTo = UserUtil.asTo(user);
     }
 
-    public static int id = BaseEntity.START_SEQ;
+    public static AuthorizedUser safeGet() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) {
+            return null;
+        }
+        Object principal = auth.getPrincipal();
+        return (principal instanceof AuthorizedUser) ? (AuthorizedUser) principal : null;
+    }
+
+    public static AuthorizedUser get() {
+        AuthorizedUser user = safeGet();
+        requireNonNull(user, "No authorized user found");
+        return user;
+    }
+
+    public int getId() {
+        return userTo.getId();
+    }
+
+    public static int id() {
+        return get().userTo.getId();
+    }
+
+    public void update(UserTo newTo) {
+        userTo = newTo;
+    }
+
+    public UserTo getUserTo() {
+        return userTo;
+    }
+
+    @Override
+    public String toString() {
+        return userTo.toString();
+    }
+
+    /*public static int id = BaseEntity.START_SEQ;
 
     public static int id() {
         return id;
@@ -26,5 +66,5 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
 
     public static void setId(int id) {
         AuthorizedUser.id = id;
-    }
+    }*/
 }

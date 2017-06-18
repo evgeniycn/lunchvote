@@ -48,3 +48,4 @@ CREATE TABLE votes
   user_id      INTEGER,
   date         DATE NOT NULL
 );
+CREATE UNIQUE INDEX votes_unique_restrauntId_userId_date_idx ON votes (restraunt_id, user_id, date)

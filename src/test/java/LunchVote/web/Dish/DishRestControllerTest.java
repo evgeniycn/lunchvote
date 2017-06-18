@@ -65,7 +65,7 @@ public class DishRestControllerTest extends AbstractRestTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(DISH3, DISH2, DISH1))));
+                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(DISH3, DISH2))));
     }
 
     @Test

@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     //Change isAfter to isBefore after testing
     @Override
-    public boolean sendVote(int restrauntId) throws TimeLimitExceededException {
+    public Vote sendVote(int restrauntId) throws TimeLimitExceededException {
         Vote vote = new Vote();
         vote.setUserId(AuthorizedUser.id());
         vote.setDate(LocalDate.now());
@@ -77,10 +77,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             userRepository.sendVote(vote);
             User user = get(AuthorizedUser.id());
             user.setLastVoteDate(LocalDate.now());
-            return userRepository.save(user) != null;
+            userRepository.save(user);
         }
         else
             throw new TimeLimitExceededException("Vote time is expired for today");
+        return vote;
     }
 
     @Override

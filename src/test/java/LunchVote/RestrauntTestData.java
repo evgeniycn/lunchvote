@@ -2,6 +2,7 @@ package LunchVote;
 
 import LunchVote.model.Restraunt;
 
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +23,7 @@ public class RestrauntTestData {
     public static final int RESTRAUNT1_ID = START_SEQ + 11;
     //public static final int ADMIN_MEAL_ID = START_SEQ + 8;
 
-    public static final Restraunt RESTRAUNT1 = new Restraunt(RESTRAUNT1_ID, "Restraunt1", of(2015, Month.MAY, 30), Arrays.asList(DISH3, DISH2, DISH1));
+    public static final Restraunt RESTRAUNT1 = new Restraunt(RESTRAUNT1_ID, "Restraunt1", LocalDate.now(), Arrays.asList(DISH3, DISH2, DISH1));
     public static final Restraunt RESTRAUNT2 = new Restraunt(RESTRAUNT1_ID + 1, "Restraunt2", of(2015, Month.MAY, 31), Arrays.asList(DISH5, DISH4));
     public static final Restraunt RESTRAUNT3 = new Restraunt(RESTRAUNT1_ID + 2, "Restraunt3", of(2015, Month.MAY, 30), Collections.singletonList(DISH6));
     public static final Restraunt RESTRAUNT4 = new Restraunt(RESTRAUNT1_ID + 3, "Restraunt4", of(2015, Month.MAY, 31), Collections.emptyList());
