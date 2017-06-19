@@ -37,7 +37,7 @@ public class DishServiceImpl implements DishService {
 
         List<Vote> allWithVotesByDate = restrauntRepository.getAllWithVotesByDate(dishDate);
         for (Vote vote : allWithVotesByDate) {
-            if (vote.getRestrauntId() != null) {
+            if (vote.getRestrauntId().equals(dish.getRestrauntId())) {
                 throw new UnsupportedOperationException("Someone already voted for this restraunt today, menu cannot be changed");
             }
         }

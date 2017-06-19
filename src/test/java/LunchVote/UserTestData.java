@@ -36,10 +36,3 @@ public class UserTestData {
         return new User(USER1_ID + 2, "New user", "new_user@gmail.com", "new_user_password", Role.ROLE_USER);
     }
 }
-/*
-  ('User1', 'user1@user.com', 'password1'),
-  ('User2', 'user2@user.com', 'password2'),
-  ('User3', 'user3@user.com', 'password3'),
-  ('Admin1', 'admin1@gmail.com', 'admin1'),
-  ('Admin2', 'admin2@gmail.com', 'admin2');
- */

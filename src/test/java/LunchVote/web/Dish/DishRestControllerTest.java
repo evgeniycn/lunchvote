@@ -4,17 +4,16 @@ import LunchVote.AbstractRestTest;
 import LunchVote.TestUtil;
 import LunchVote.model.Dish;
 import LunchVote.service.DishService;
-import LunchVote.web.Json.JacksonObjectMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.Arrays;
 
+import static LunchVote.RestrauntTestData.RESTRAUNT3;
 import static LunchVote.TestUtil.userHttpBasic;
+import static LunchVote.UserTestData.ADMIN1;
 import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static LunchVote.DishTestData.*;
@@ -41,7 +40,7 @@ public class DishRestControllerTest extends AbstractRestTest {
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + DISH1_ID)
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -51,7 +50,7 @@ public class DishRestControllerTest extends AbstractRestTest {
     @Test
     public void getByDate() throws Exception {
         mockMvc.perform(get(REST_URL + "/date/2015-05-31")
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -61,7 +60,7 @@ public class DishRestControllerTest extends AbstractRestTest {
     @Test
     public void getByDateRestrauntID() throws Exception {
         mockMvc.perform(get(REST_URL + "/date/2015-05-30/restraunt/100011")
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -75,7 +74,7 @@ public class DishRestControllerTest extends AbstractRestTest {
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(getMapper().writeValueAsString((created)))
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
         Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
@@ -91,7 +90,39 @@ public class DishRestControllerTest extends AbstractRestTest {
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(getMapper().writeValueAsString((updated)))
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+
+        Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
+
+        assertEquals(updated.toString(), updated.toString());
+    }
+
+    @Test
+    public void testUpdateVotedMenuWithVote() throws Exception {
+        Dish updated = getUpdated();
+        updated.setRestrauntId(RESTRAUNT3.getId());
+
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString((updated)))
+                .with(userHttpBasic(ADMIN1)))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+
+        Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
+
+        assertEquals(updated.toString(), updated.toString());
+    }
+
+    @Test
+    public void testUpdateVotedMenu() throws Exception {
+        Dish updated = getUpdated();
+        updated.setRestrauntId(RESTRAUNT3.getId());
+
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString((updated)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
         Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
@@ -103,7 +134,7 @@ public class DishRestControllerTest extends AbstractRestTest {
     @Test
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + DISH1_ID)
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk());
         assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2).toString(), service.getAll().toString());
     }

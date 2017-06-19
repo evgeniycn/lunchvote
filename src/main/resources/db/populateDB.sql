@@ -7,7 +7,7 @@ ALTER SEQUENCE global_seq RESTART WITH 100000;
 
 INSERT INTO USERS (name, email, password, LAST_VOTE_DATE) VALUES
   ('User1', 'user1@user.com', 'password1', NULL),
-  ('User2', 'user2@user.com', 'password2', NULL),
+  ('User2', 'user2@user.com', 'password2', now),
   ('User3', 'user3@user.com', 'password3', now),
   ('Admin1', 'admin1@gmail.com', 'admin1', NULL),
   ('Admin2', 'admin2@gmail.com', 'admin2', NULL);
@@ -30,7 +30,7 @@ INSERT INTO DISHES (name, date, price, restraunt_id) VALUES
 
 INSERT INTO RESTRAUNTS (name, update_date) VALUES
   ('Restraunt1', now),
-  ('Restraunt2', '2015-05-31'),
+  ('Restraunt2', now),
   ('Restraunt3', '2015-05-30'),
   ('Restraunt4', '2015-05-31'),
   ('Restraunt5', '2015-05-31'),
@@ -38,7 +38,7 @@ INSERT INTO RESTRAUNTS (name, update_date) VALUES
 
 INSERT INTO VOTES (restraunt_id, user_id, date) VALUES
   (100011, 100000, '2015-05-31'),
-  (100011, 100001, '2015-05-31'),
+  (100011, 100001, now),
   (100011, 100002, '2015-05-31'),
   (100012, 100003, '2015-05-31'),
   (100012, 100004, '2015-05-31'),

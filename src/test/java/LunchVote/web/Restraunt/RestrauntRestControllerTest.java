@@ -18,6 +18,7 @@ import static LunchVote.RestrauntTestData.*;
 import static LunchVote.RestrauntTestData.RESTRAUNT2;
 import static LunchVote.RestrauntTestData.RESTRAUNT3;
 import static LunchVote.TestUtil.userHttpBasic;
+import static LunchVote.UserTestData.ADMIN1;
 import static LunchVote.UserTestData.USER1;
 import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
 import static java.time.LocalDate.of;
@@ -42,7 +43,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + RESTRAUNT1.getId())
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -52,7 +53,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
     @Test
     public void testGetAll() throws Exception {
         mockMvc.perform(get(REST_URL)
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -62,23 +63,23 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
     @Test
     public void testGetAllWithTodayMenu() throws Exception {
         mockMvc.perform(get(REST_URL + "/date/2015-05-31")
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT2))));
+                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4))));
     }
 
     @Test
     public void testGetAllWithVotesByDate() throws Exception {
 
         ObjectNode response = mapper.createObjectNode();
-        response.put("100011", 3);
+        response.put("100011", 2);
         response.put("100012", 2);
 
 
         mockMvc.perform(get(REST_URL + "/votes/2015-05-31")
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -88,7 +89,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
     @Test
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + RESTRAUNT1_ID)
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk());
         assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2).toString(), service.getAll().toString());
     }
@@ -100,7 +101,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(getMapper().writeValueAsString((created)))
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
         Restraunt returned = getMapper().readValue(TestUtil.getContent(action), Restraunt.class);
@@ -116,7 +117,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(getMapper().writeValueAsString((updated)))
-                .with(userHttpBasic(USER1)))
+                .with(userHttpBasic(ADMIN1)))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
         Restraunt returned = getMapper().readValue(TestUtil.getContent(action), Restraunt.class);

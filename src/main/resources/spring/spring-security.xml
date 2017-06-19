@@ -14,7 +14,7 @@
         <csrf disabled="true"/>
     </http>
 
-    <http>
+    <!--<http>
         <intercept-url pattern="/login" access="isAnonymous()"/>
         <intercept-url pattern="/register" access="isAnonymous()"/>
 
@@ -25,8 +25,8 @@
                     authentication-failure-url="/login?error=true"
                     login-processing-url="/spring_security_check"/>
         <logout logout-success-url="/login"/>
-        <!--<csrf disabled="true"/>-->
-    </http>
+        &lt;!&ndash;<csrf disabled="true"/>&ndash;&gt;
+    </http>-->
 
     <beans:bean class="LunchVote.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
 

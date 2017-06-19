@@ -37,7 +37,7 @@ public class DishTestData {
     }
 
     public static Dish getUpdated() {
-        return new Dish(DISH1_ID, "Updated dish", 20.00, DISH1.getDate(), 100011);
+        return new Dish(DISH1_ID, "Updated dish", 20.00, DISH1.getDate(), 100014);
     }
 
 

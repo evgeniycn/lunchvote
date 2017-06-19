@@ -1,6 +1,7 @@
 package LunchVote;
 
 import LunchVote.model.Restraunt;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -24,7 +25,7 @@ public class RestrauntTestData {
     //public static final int ADMIN_MEAL_ID = START_SEQ + 8;
 
     public static final Restraunt RESTRAUNT1 = new Restraunt(RESTRAUNT1_ID, "Restraunt1", LocalDate.now(), Arrays.asList(DISH3, DISH2, DISH1));
-    public static final Restraunt RESTRAUNT2 = new Restraunt(RESTRAUNT1_ID + 1, "Restraunt2", of(2015, Month.MAY, 31), Arrays.asList(DISH5, DISH4));
+    public static final Restraunt RESTRAUNT2 = new Restraunt(RESTRAUNT1_ID + 1, "Restraunt2", LocalDate.now(), Arrays.asList(DISH5, DISH4));
     public static final Restraunt RESTRAUNT3 = new Restraunt(RESTRAUNT1_ID + 2, "Restraunt3", of(2015, Month.MAY, 30), Collections.singletonList(DISH6));
     public static final Restraunt RESTRAUNT4 = new Restraunt(RESTRAUNT1_ID + 3, "Restraunt4", of(2015, Month.MAY, 31), Collections.emptyList());
     public static final Restraunt RESTRAUNT5 = new Restraunt(RESTRAUNT1_ID + 4, "Restraunt5", of(2015, Month.MAY, 31), Collections.emptyList());

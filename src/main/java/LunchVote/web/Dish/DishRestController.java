@@ -18,7 +18,7 @@ import static LunchVote.web.Dish.DishRestController.DISH_REST_URL;
 @RequestMapping(value = DISH_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishRestController {
 
-    static final String DISH_REST_URL = "/rest/dishes";
+    static final String DISH_REST_URL = "/rest/admin/dishes";
 
     private DishService service;
 

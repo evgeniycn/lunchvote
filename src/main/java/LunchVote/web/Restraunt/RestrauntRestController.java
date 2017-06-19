@@ -20,7 +20,7 @@ import static LunchVote.web.Restraunt.RestrauntRestController.RESTRAUNT_REST_URL
 @RequestMapping(value = RESTRAUNT_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestrauntRestController {
 
-    static final String RESTRAUNT_REST_URL = "/rest/restraunts";
+    static final String RESTRAUNT_REST_URL = "/rest/admin/restraunts";
 
     private RestrauntService service;
 
