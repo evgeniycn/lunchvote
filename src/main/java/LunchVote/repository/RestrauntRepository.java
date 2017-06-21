@@ -1,9 +1,7 @@
 package LunchVote.repository;
 
-import LunchVote.model.Dish;
 import LunchVote.model.Restraunt;
 import LunchVote.model.Vote;
-import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,13 +11,11 @@ import java.util.List;
  */
 public interface RestrauntRepository {
 
-    //List<Dish> getAllDishesByDate(LocalDate date);
+    Restraunt get(int id);
 
-    Restraunt get (int id);
+    boolean delete(int id);
 
-    boolean delete (int id);
-
-    Restraunt save (Restraunt restraunt);
+    Restraunt save(Restraunt restraunt);
 
     List<Restraunt> getAll();
 

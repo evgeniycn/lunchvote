@@ -9,19 +9,15 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-
-import java.time.Month;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static LunchVote.RestrauntTestData.*;
 import static LunchVote.RestrauntTestData.RESTRAUNT2;
 import static LunchVote.RestrauntTestData.RESTRAUNT3;
 import static LunchVote.TestUtil.userHttpBasic;
 import static LunchVote.UserTestData.ADMIN1;
-import static LunchVote.UserTestData.USER1;
+import static LunchVote.RestrauntTestData.MATCHER;
 import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
-import static java.time.LocalDate.of;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,7 +43,8 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(mapper.writeValueAsString(RESTRAUNT1)));
+                .andExpect(MATCHER.contentMatcher(RESTRAUNT1));
+                //.andExpect(content().string(mapper.writeValueAsString(RESTRAUNT1)));
     }
 
     @Test
@@ -57,7 +54,8 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1))));
+                .andExpect(MATCHER.contentListMatcher(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1)));
+                //.andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1))));
     }
 
     @Test
@@ -67,7 +65,8 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4))));
+                .andExpect(MATCHER.contentListMatcher(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4)));
+                //.andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4))));
     }
 
     @Test
@@ -122,6 +121,6 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
 
         Restraunt returned = getMapper().readValue(TestUtil.getContent(action), Restraunt.class);
 
-        assertEquals(updated.toString(), updated.toString());
+        assertEquals(updated.toString(), returned.toString());
     }
 }

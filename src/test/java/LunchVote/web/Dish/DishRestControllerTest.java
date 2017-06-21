@@ -95,7 +95,7 @@ public class DishRestControllerTest extends AbstractRestTest {
 
         Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
 
-        assertEquals(updated.toString(), updated.toString());
+        assertEquals(updated.toString(), returned.toString());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class DishRestControllerTest extends AbstractRestTest {
 
         Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
 
-        assertEquals(updated.toString(), updated.toString());
+        assertEquals(updated.toString(), returned.toString());
     }
 
     @Test
@@ -127,7 +127,7 @@ public class DishRestControllerTest extends AbstractRestTest {
 
         Dish returned = getMapper().readValue(TestUtil.getContent(action), Dish.class);
 
-        assertEquals(updated.toString(), updated.toString());
+        assertEquals(updated.toString(), returned.toString());
     }
 
 

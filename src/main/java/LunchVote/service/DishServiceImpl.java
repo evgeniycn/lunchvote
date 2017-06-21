@@ -7,9 +7,12 @@ import LunchVote.repository.RestrauntRepository;
 import LunchVote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -27,12 +30,13 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish get(int id) throws NotFoundException {
-        return dishRepository.get(id);
+    public Dish get(int id) {
+        return checkNotFoundWithId(dishRepository.get(id), id);
     }
 
     @Override
     public Dish save(Dish dish) {
+        Assert.notNull(dish, "dish must not be null");
         LocalDate dishDate = dish.getDate();
 
         List<Vote> allWithVotesByDate = restrauntRepository.getAllWithVotesByDate(dishDate);
@@ -46,21 +50,23 @@ public class DishServiceImpl implements DishService {
             dish = dishRepository.save(dish);
         }
         return dish;
-
     }
 
     @Override
-    public void delete(int id) throws NotFoundException {
-        dishRepository.delete(id);
+    public void delete(int id) {
+        checkNotFoundWithId(dishRepository.delete(id), id);
     }
 
     @Override
     public List<Dish> getByDate(LocalDate date) {
+        Assert.notNull(date, "date must not be null");
         return dishRepository.getByDate(date);
     }
 
     @Override
     public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
+        Assert.notNull(date, "date must not be null");
+        Assert.notNull(restrauntId, "restrauntId must not be null");
         return dishRepository.getByDateRestrauntID(date, restrauntId);
     }
 

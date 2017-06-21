@@ -1,6 +1,10 @@
 package LunchVote.model;
 
 import org.hibernate.annotations.*;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -30,23 +34,27 @@ public class User extends BaseEntity {
     public static final String BY_EMAIL = "User.getByEmail";
 
     @Column(name = "NAME", nullable = false)
+    @NotBlank
+    @Length(min = 3, max = 25)
     private String name;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", nullable = false, unique = true)
+    @NotBlank
+    @Email
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)
+    @NotBlank
+    @Length(min = 6)
     private String password;
 
-    @Column(name = "LAST_VOTE_DATE", nullable = true)
+    @Column(name = "LAST_VOTE_DATE")
     private LocalDate lastVoteDate;
 
-    ////@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
     private Set<Role> roles;
 

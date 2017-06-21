@@ -3,7 +3,6 @@ package LunchVote.repository;
 import LunchVote.model.Dish;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,11 +14,11 @@ public interface DishRepository {
 
     Dish save(Dish dish);
 
-    boolean delete (int id);
+    boolean delete(int id);
 
-    List<Dish> getByDate (LocalDate date);
+    List<Dish> getByDate(LocalDate date);
 
-    List<Dish> getByDateRestrauntID (LocalDate date, int restrauntId);
+    List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId);
 
     List<Dish> getAll();
 }

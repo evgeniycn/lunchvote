@@ -1,10 +1,12 @@
 package LunchVote.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Set;
 
 /**
  * Created by evgeniy on 13.06.2017.
@@ -17,17 +19,20 @@ import java.util.Set;
 @Table(name = "VOTES", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Vote extends BaseEntity {
 
-    public static final String DELETE_BY_RESTRAUNT_ID  = "Vote.deleteByRestrauntId";
+    public static final String DELETE_BY_RESTRAUNT_ID = "Vote.deleteByRestrauntId";
 
     public static final String ALL_BY_DATE_WITH_VOTES = "Vote.getAllByDateWithVotes";
 
     @Column(name = "USER_ID", nullable = false)
+    @NotNull
     private Integer userId;
 
     @Column(name = "DATE", nullable = false)
+    @NotNull
     private LocalDate date;
 
     @Column(name = "RESTRAUNT_ID")
+    @NotNull
     private Integer restrauntId;
 
     public Vote() {

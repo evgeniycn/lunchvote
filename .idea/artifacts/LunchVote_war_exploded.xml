@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="LunchVote:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/LunchVote_war_exploded</output-path>
+  <artifact type="exploded-war" name="lunchvote:war exploded">
+    <output-path>$PROJECT_DIR$/../classes/artifacts/lunchvote_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="LunchVote" />
+          <element id="module-output" name="lunchvote" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.2.2.RELEASE" />
@@ -20,6 +20,7 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:4.2.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:4.2.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-test:4.2.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.7.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.6" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.6" />
@@ -50,7 +51,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.8" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="LunchVote/web/Web" />
+      <element id="javaee-facet-resources" facet="lunchvote/web/Web" />
     </root>
   </artifact>
 </component>

@@ -1,8 +1,13 @@
 package LunchVote.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -27,18 +32,24 @@ public class Dish extends BaseEntity {
     public static final String DELETE_BY_ID = "Dish.deleteById";
 
     @Column(name = "NAME", nullable = false)
+    @NotBlank
+    @Length(min = 3, max = 25)
     private String name;
 
     @Column(name = "PRICE", nullable = false)
+    @NotNull
+    @Range(min = 10, max = 1000)
     private double price;
 
     @Column(name = "DATE", nullable = false)
+    @NotNull
     private LocalDate date;
 
     @Column(name = "RESTRAUNT_ID", nullable = false)
+    @NotNull
     private int restrauntId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)
     @JsonIgnore
     private Restraunt restraunt;

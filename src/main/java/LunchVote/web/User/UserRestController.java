@@ -1,7 +1,6 @@
 package LunchVote.web.User;
 
 import LunchVote.model.Restraunt;
-import LunchVote.model.User;
 import LunchVote.model.Vote;
 import LunchVote.service.RestrauntService;
 import LunchVote.service.UserService;
@@ -40,14 +39,14 @@ public class UserRestController {
         return userService.sendVote(id);
     }
 
-    @GetMapping(value = "/date/{date}")
-    public List<Restraunt> getAllWithTodayMenu(@PathVariable("date") LocalDate date) {
-        return restrauntService.getAllWithTodayMenu(date);
+    @GetMapping(value = "/menu")
+    public List<Restraunt> getAllWithTodayMenu() {
+        return restrauntService.getAllWithTodayMenu(LocalDate.now());
     }
 
-    @GetMapping(value = "/votes/{date}")
-    public Map<Integer, Integer> getAllWithVotesByDate(@PathVariable("date") LocalDate date) {
-        return restrauntService.getAllWithVotesByDate(date);
+    @GetMapping(value = "/withVotes")
+    public Map<Integer, Integer> getAllVotesByDate() {
+        return restrauntService.getAllWithVotesByDate(LocalDate.now());
     }
 
 }

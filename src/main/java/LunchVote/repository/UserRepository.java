@@ -2,7 +2,6 @@ package LunchVote.repository;
 
 import LunchVote.model.User;
 import LunchVote.model.Vote;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

@@ -28,7 +28,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
     @Test
     public void save() throws Exception {
         Dish created = getCreated();
-        Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100010));
+        Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100011));
         created.setId(100026);
         assertEquals(created.toString(), dish.toString());
     }
@@ -61,7 +61,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void getByDateRestrauntID() throws Exception {
-        assertEquals(Arrays.asList(DISH4, DISH5).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
+        assertEquals(Arrays.asList(DISH5, DISH4).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
     }
 
     @Test

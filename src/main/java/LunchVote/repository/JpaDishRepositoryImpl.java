@@ -1,14 +1,12 @@
 package LunchVote.repository;
 
 import LunchVote.model.Dish;
-import LunchVote.repository.DishRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,8 +29,7 @@ public class JpaDishRepositoryImpl implements DishRepository {
         if (dish.isNew()) {
             em.persist(dish);
             return dish;
-        }
-        else return em.merge(dish);
+        } else return em.merge(dish);
     }
 
     @Transactional

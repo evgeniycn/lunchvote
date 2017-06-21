@@ -19,6 +19,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
+
 /**
  * Created by Evgeniy on 07.05.2017.
  */
@@ -35,8 +37,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User get(int id) throws NotFoundException {
-        return userRepository.get(id);
+    public User get(int id) {
+        return checkNotFoundWithId(userRepository.get(id), id);
     }
 
     @Override
@@ -47,11 +49,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void delete(int id) throws NotFoundException {
-        userRepository.delete(id);
+        checkNotFoundWithId(userRepository.delete(id), id);
     }
 
     @Override
     public User save(User user) {
+        Assert.notNull(user, "user must not me null");
         return userRepository.save(user);
     }
 
@@ -71,17 +74,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         List<Restraunt> allWithTodayMenu = restrauntRepository.getAllWithTodayMenu(LocalDate.now());
 
-        if (!allWithTodayMenu.contains(restrauntRepository.get(restrauntId))) throw new NotFoundException("No menu from this restraunt available for today");
+
+        boolean hasTodayMenu = false;
+        for (Restraunt restraunt : allWithTodayMenu) {
+            if (restraunt.getId().equals(restrauntId)) {
+                hasTodayMenu = true;
+                break;
+            }
+        }
+
+        if (!hasTodayMenu)
+            throw new NotFoundException("No menu from this restraunt available for today");
 
         if (LocalTime.now().isAfter(LocalTime.of(11, 0))) {
             userRepository.sendVote(vote);
             User user = get(AuthorizedUser.id());
             user.setLastVoteDate(LocalDate.now());
             userRepository.save(user);
-        }
-        else
+        } else
             throw new TimeLimitExceededException("Vote time is expired for today");
-        return vote;
+        return checkNotFoundWithId(vote, restrauntId);
     }
 
     @Override

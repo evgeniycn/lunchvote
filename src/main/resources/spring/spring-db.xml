@@ -10,7 +10,7 @@
         <tx:annotation-driven/>
 
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
-        <context:component-scan base-package="LunchVote.**.repository.jpa"/>
+        <context:component-scan base-package="LunchVote.**.repository"/>
 
         <!--no pooling-->
         <bean id="dataSource"

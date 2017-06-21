@@ -40,8 +40,7 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepository {
         if (restraunt.isNew()) {
             em.persist(restraunt);
             return restraunt;
-        }
-        else return em.merge(restraunt);
+        } else return em.merge(restraunt);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepository {
 
     @Override
     public List<Vote> getAllWithVotesByDate(LocalDate date) {
-        return  em.createNamedQuery(Vote.ALL_BY_DATE_WITH_VOTES, Vote.class)
+        return em.createNamedQuery(Vote.ALL_BY_DATE_WITH_VOTES, Vote.class)
                 .setParameter("date", date)
                 .getResultList();
     }

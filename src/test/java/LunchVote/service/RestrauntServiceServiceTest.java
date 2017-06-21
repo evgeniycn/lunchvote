@@ -36,7 +36,7 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
     @Test
     public void testSave() throws Exception {
         Restraunt created = getCreated();
-        Restraunt restraunt = service.save(new Restraunt(null, "New restraunt", LocalDate.of(2017, Month.JUNE, 1), Collections.emptyList()));
+        Restraunt restraunt = service.save(new Restraunt(null, "New restraunt", LocalDate.of(2017, Month.JUNE, 1)));
         created.setId(100026);
         assertEquals(created.toString(), restraunt.toString());
     }

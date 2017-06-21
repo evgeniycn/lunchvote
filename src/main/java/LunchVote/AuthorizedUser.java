@@ -1,6 +1,5 @@
 package LunchVote;
 
-import LunchVote.model.BaseEntity;
 import LunchVote.model.User;
 import LunchVote.to.UserTo;
 import LunchVote.util.UserUtil;

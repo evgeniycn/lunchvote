@@ -13,8 +13,6 @@ import java.util.Map;
  */
 public interface RestrauntService {
 
-    //List<Dish> getAllDishesByDate(LocalDate date);
-
     Restraunt get(int id);
 
     void delete(int id);
@@ -24,8 +22,6 @@ public interface RestrauntService {
     List<Restraunt> getAll();
 
     List<Restraunt> getAllWithTodayMenu(LocalDate date);
-
-    /*Restraunt getVotesByDateAndRestrauntId (LocalDate date, int restrauntId);*/
 
     Map<Integer, Integer> getAllWithVotesByDate(LocalDate date);
 }

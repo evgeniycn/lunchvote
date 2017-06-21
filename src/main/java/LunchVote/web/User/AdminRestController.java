@@ -1,7 +1,6 @@
 package LunchVote.web.User;
 
 import LunchVote.model.User;
-import LunchVote.service.RestrauntService;
 import LunchVote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,12 +22,9 @@ public class AdminRestController {
 
     private UserService userService;
 
-    private RestrauntService restrauntService;
-
     @Autowired
-    public AdminRestController(UserService userService, RestrauntService restrauntService) {
+    public AdminRestController(UserService userService) {
         this.userService = userService;
-        this.restrauntService = restrauntService;
     }
 
     @GetMapping(value = "/{id}")
@@ -51,21 +47,5 @@ public class AdminRestController {
         return userService.getAll();
     }
 
-
-
-    /*@GetMapping(value = "/vote/{id}")
-    public Vote sendVote(@PathVariable("id") int id) throws TimeLimitExceededException {
-        return userService.sendVote(id);
-    }
-
-    @GetMapping(value = "/date/{date}")
-    public List<Restraunt> getAllWithTodayMenu(@PathVariable("date") LocalDate date) {
-        return restrauntService.getAllWithTodayMenu(date);
-    }
-
-    @GetMapping(value = "/votes/{date}")
-    public Map<Integer, Integer> getAllWithVotesByDate(@PathVariable("date") LocalDate date) {
-        return restrauntService.getAllWithVotesByDate(date);
-    }*/
 
 }
