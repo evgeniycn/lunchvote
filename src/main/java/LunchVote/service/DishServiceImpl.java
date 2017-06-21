@@ -46,7 +46,8 @@ public class DishServiceImpl implements DishService {
             }
         }
 
-        if (restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate() == null || restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate().isBefore(dishDate)) {
+        LocalDate updatedDate = restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate();
+        if (updatedDate == null || updatedDate.isBefore(dishDate)) {
             dish = dishRepository.save(dish);
         }
         return dish;

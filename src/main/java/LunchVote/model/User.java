@@ -1,6 +1,7 @@
 package LunchVote.model;
 
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -21,6 +22,7 @@ import java.util.Set;
 /**
  * Created by Evgeniy on 07.05.2017.
  */
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @NamedQueries({
         @NamedQuery(name = User.DELETE_BY_ID, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.ALL, query = "SELECT u FROM User u ORDER BY u.id DESC"),
@@ -51,6 +53,7 @@ public class User extends BaseEntity {
     @Column(name = "LAST_VOTE_DATE")
     private LocalDate lastVoteDate;
 
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")

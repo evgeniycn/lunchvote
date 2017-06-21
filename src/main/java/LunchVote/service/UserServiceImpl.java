@@ -74,7 +74,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         List<Restraunt> allWithTodayMenu = restrauntRepository.getAllWithTodayMenu(LocalDate.now());
 
-
         boolean hasTodayMenu = false;
         for (Restraunt restraunt : allWithTodayMenu) {
             if (restraunt.getId().equals(restrauntId)) {
