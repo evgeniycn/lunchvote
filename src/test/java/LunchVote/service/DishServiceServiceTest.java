@@ -22,7 +22,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void get() throws Exception {
-        assertEquals(DISH1.toString(),service.get(100005).toString());
+        assertEquals(DISH1,service.get(100005));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
         Dish created = getCreated();
         Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100011));
         created.setId(100026);
-        assertEquals(created.toString(), dish.toString());
+        assertEquals(created, dish);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
         dish.setPrice(updated.getPrice());
         dish.setRestrauntId(updated.getRestrauntId());
 
-        assertEquals(updated.toString(), dish.toString());
+        assertEquals(updated, dish);
     }
 
 
@@ -51,22 +51,22 @@ public class DishServiceServiceTest extends AbstractServiceTest {
     @Test
     public void delete() throws Exception {
         service.delete(DISH1.getId());
-        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2).toString(), service.getAll().toString());
+        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2), service.getAll());
     }
 
     @Test
     public void getByDate() throws Exception {
-        assertEquals(Arrays.asList(DISH6, DISH5, DISH4).toString(), service.getByDate(LocalDate.of(2015, Month.MAY, 31)).toString());
+        assertEquals(Arrays.asList(DISH6, DISH5, DISH4), service.getByDate(LocalDate.of(2015, Month.MAY, 31)));
     }
 
     @Test
     public void getByDateRestrauntID() throws Exception {
-        assertEquals(Arrays.asList(DISH5, DISH4).toString(), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
+        assertEquals(Arrays.asList(DISH5, DISH4), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012));
     }
 
     @Test
     public void getAll() throws Exception {
-        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1).toString(), service.getAll().toString());
+        assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1), service.getAll());
     }
 
 }

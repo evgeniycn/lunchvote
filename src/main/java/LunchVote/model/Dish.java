@@ -111,6 +111,33 @@ public class Dish extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Dish dish = (Dish) o;
+
+        if (Double.compare(dish.price, price) != 0) return false;
+        if (restrauntId != dish.restrauntId) return false;
+        if (name != null ? !name.equals(dish.name) : dish.name != null) return false;
+        return date != null ? date.equals(dish.date) : dish.date != null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + restrauntId;
+        result = 31 * result + (restraunt != null ? restraunt.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Dish{" +
                 "id='" + this.getId() + '\'' +

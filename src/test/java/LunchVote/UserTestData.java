@@ -4,6 +4,9 @@ import LunchVote.model.Role;
 import LunchVote.model.User;
 import LunchVote.util.ModelMatcher;
 import LunchVote.util.PasswordUtil;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 import java.util.Arrays;
 
@@ -18,12 +21,12 @@ import static LunchVote.model.BaseEntity.START_SEQ;
  */
 public class UserTestData {
 
-    public static final ModelMatcher<User> MATCHER = ModelMatcher.of(User.class, (expected, actual) -> expected == actual ||
+    /*public static final ModelMatcher<User> MATCHER = ModelMatcher.of(User.class, (expected, actual) -> expected == actual ||
             (comparePassword(expected.getPassword(), actual.getPassword()))
                 && Objects.equals(expected.getId(), actual.getId())
                 && Objects.equals(expected.getEmail(), actual.getEmail())
                 && Objects.equals(expected.getName(), actual.getName())
-                && Objects.equals(expected.getRoles(), actual.getRoles()));
+                && Objects.equals(expected.getRoles(), actual.getRoles()));*/
 
     public static final int USER1_ID = START_SEQ;
 
@@ -43,16 +46,6 @@ public class UserTestData {
     }
 
     public static User getUpdated() {
-        return new User(USER1_ID + 2, "New user", "new_user@gmail.com", "new_user_password", Role.ROLE_USER);
-    }
-
-    private static boolean comparePassword(String rawOrEncodedPassword, String password) {
-        if (PasswordUtil.isEncoded(rawOrEncodedPassword)) {
-            return rawOrEncodedPassword.equals(password);
-        } else if (!PasswordUtil.isMatch(rawOrEncodedPassword, password)) {
-            //LOG.error("Password " + password + " doesn't match encoded " + password);
-            return false;
-        }
-        return true;
+        return new User(USER1_ID + 2, "New user", "new_user@gmail.com", "password3", Role.ROLE_USER);
     }
 }

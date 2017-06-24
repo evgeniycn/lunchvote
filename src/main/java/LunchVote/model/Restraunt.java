@@ -96,6 +96,25 @@ public class Restraunt extends BaseEntity {
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Restraunt restraunt = (Restraunt) o;
+
+        if (name != null ? !name.equals(restraunt.name) : restraunt.name != null) return false;
+        return updateDate != null ? updateDate.equals(restraunt.updateDate) : restraunt.updateDate != null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (updateDate != null ? updateDate.hashCode() : 0);
+        result = 31 * result + (dishList != null ? dishList.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Restraunt{" +
                 "id='" + this.getId() + '\'' +

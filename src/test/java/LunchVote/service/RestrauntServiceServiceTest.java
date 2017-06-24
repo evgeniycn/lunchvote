@@ -24,13 +24,20 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet() throws Exception {
-        assertEquals(RESTRAUNT1.toString(), service.get(100011).toString());
+        assertEquals(RESTRAUNT1, service.get(100011));
     }
+
+    /*
+    @Test
+    public void get() throws Exception {
+        assertEquals(USER1, service.get(100000));
+    }
+     */
 
     @Test
     public void testDelete() throws Exception {
         service.delete(100011);
-        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2).toString(),service.getAll().toString());
+        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2),service.getAll());
     }
 
     @Test
@@ -38,7 +45,7 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
         Restraunt created = getCreated();
         Restraunt restraunt = service.save(new Restraunt(null, "New restraunt", LocalDate.of(2017, Month.JUNE, 1)));
         created.setId(100026);
-        assertEquals(created.toString(), restraunt.toString());
+        assertEquals(created, restraunt);
     }
 
     @Test
@@ -50,17 +57,17 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
         restraunt.setDishList(updated.getDishList());
         restraunt.setUpdatedDate(updated.getUpdatedDate());
 
-        assertEquals(updated.toString(), restraunt.toString());
+        assertEquals(updated, restraunt);
     }
 
     @Test
     public void testGetAll() throws Exception {
-        assertEquals(RESTRAUNTS.toString(), service.getAll().toString());
+        assertEquals(RESTRAUNTS, service.getAll());
     }
 
     @Test
     public void testGetAllWithTodayMenu() throws Exception {
-        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT2).toString(), service.getAllWithTodayMenu(LocalDate.of(2015, Month.MAY, 31)).toString());
+        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4), service.getAllWithTodayMenu(LocalDate.of(2015, Month.MAY, 31)));
     }
 
     /*@Test

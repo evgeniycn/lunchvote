@@ -6,6 +6,7 @@ import LunchVote.model.User;
 import LunchVote.model.Vote;
 import LunchVote.repository.RestrauntRepository;
 import LunchVote.repository.UserRepository;
+import LunchVote.util.PasswordUtil;
 import LunchVote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,6 +56,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User save(User user) {
         Assert.notNull(user, "user must not me null");
+        if (!PasswordUtil.isEncoded(user.getPassword())) user.setPassword(PasswordUtil.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

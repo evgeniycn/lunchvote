@@ -5,7 +5,9 @@ import LunchVote.TestUtil;
 import LunchVote.model.*;
 import LunchVote.service.RestrauntService;
 import LunchVote.service.UserService;
+import LunchVote.util.PasswordUtil;
 import LunchVote.util.exception.NotFoundException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -15,6 +17,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
 import static LunchVote.RestrauntTestData.RESTRAUNT2;
 import static LunchVote.TestUtil.userHttpBasic;
@@ -52,12 +55,12 @@ public class UserRestControllerTest extends AbstractRestTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_ADMIN_URL + USER1.getId())
+        ResultActions resultActions = mockMvc.perform(get(REST_ADMIN_URL + USER1.getId())
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(USER1));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        assertEquals(USER1, mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), User.class));
     }
 
     @Test
@@ -66,11 +69,10 @@ public class UserRestControllerTest extends AbstractRestTest {
         user3.setLastVoteDate(LocalDate.now());
         User user2 = USER2;
         user2.setLastVoteDate(LocalDate.now());
-        mockMvc.perform(delete(REST_ADMIN_URL + USER1_ID)
+        ResultActions resultActions = mockMvc.perform(delete(REST_ADMIN_URL + USER1_ID)
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk());
-        MATCHER.assertCollectionEquals(Arrays.asList(ADMIN2, ADMIN1, user3, user2), service.getAll());
-
+        assertEquals(Arrays.asList(ADMIN2, ADMIN1, user3, user2), service.getAll());
     }
 
     @Test
@@ -86,12 +88,13 @@ public class UserRestControllerTest extends AbstractRestTest {
         User returned = getMapper().readValue(TestUtil.getContent(action), User.class);
         created.setId(returned.getId());
 
-        assertEquals(created.toString(), returned.toString());
+        assertEquals(created, returned);
     }
 
     @Test
     public void testUpdate() throws Exception {
         User updated = getUpdated();
+        //updated.setPassword(PasswordUtil.encode(updated.getPassword()));
 
         ResultActions action = mockMvc.perform(post(REST_ADMIN_URL)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -101,7 +104,7 @@ public class UserRestControllerTest extends AbstractRestTest {
 
         User returned = getMapper().readValue(TestUtil.getContent(action), User.class);
 
-        assertEquals(updated.toString(), returned.toString());
+        assertEquals(updated, returned);
     }
 
     @Test
@@ -109,12 +112,14 @@ public class UserRestControllerTest extends AbstractRestTest {
         User user2 = USER2;
         user2.setLastVoteDate(LocalDate.now());
 
-        mockMvc.perform(get(REST_ADMIN_URL)
+        ResultActions resultActions = mockMvc.perform(get(REST_ADMIN_URL)
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(Arrays.asList(ADMIN2, ADMIN1, USER3, user2, USER1)));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        assertEquals(Arrays.asList(ADMIN2, ADMIN1, USER3, user2, USER1), mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), new TypeReference<List<User>>(){}));
+
+        //.andExpect(MATCHER.contentListMatcher(Arrays.asList(ADMIN2, ADMIN1, USER3, user2, USER1)));
     }
 
     @Test
@@ -132,7 +137,7 @@ public class UserRestControllerTest extends AbstractRestTest {
 
         Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
         vote.setId(returned.getId());
-        assertEquals(vote.toString(), returned.toString());
+        assertEquals(vote, returned);
     }
 
     @Test
@@ -151,7 +156,7 @@ public class UserRestControllerTest extends AbstractRestTest {
 
         Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
         vote.setId(returned.getId());
-        assertEquals(vote.toString(), returned.toString());
+        assertEquals(vote, returned);
         restrauntService.getAllWithVotesByDate(LocalDate.now());
     }
 
@@ -171,7 +176,7 @@ public class UserRestControllerTest extends AbstractRestTest {
 
         Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
         vote.setId(returned.getId());
-        assertEquals(vote.toString(), returned.toString());
+        assertEquals(vote, returned);
         assertEquals("{100011=1, 100012=1}", restrauntService.getAllWithVotesByDate(LocalDate.now()).toString());
     }
 

@@ -3,6 +3,7 @@ package LunchVote.service;
 import LunchVote.AbstractServiceTest;
 import LunchVote.model.Role;
 import LunchVote.model.User;
+import LunchVote.util.PasswordUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,21 +22,21 @@ public class UserServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void get() throws Exception {
-        assertEquals(USER1.toString(), service.get(100000).toString());
+        assertEquals(USER1, service.get(100000));
     }
 
     @Test
     public void delete() throws Exception {
         service.delete(100001);
-        assertEquals(Arrays.asList(ADMIN2, ADMIN1, USER3, USER1).toString(), service.getAll().toString());
+        assertEquals(Arrays.asList(ADMIN2, ADMIN1, USER3, USER1), service.getAll());
     }
 
     @Test
     public void save() throws Exception {
         User user = getCreated();
         user.setId(100026);
-        User created = service.save(new User(null, "New user", "new_user@gmail.com", "new_user_password", Role.ROLE_USER));
-        assertEquals(user.toString(), created.toString());
+        User created = service.save(new User(null, "New user", "new_user@gmail.com", PasswordUtil.encode("new_user_password"), Role.ROLE_USER));
+        assertEquals(user, created);
     }
 
     @Test
@@ -45,14 +46,13 @@ public class UserServiceServiceTest extends AbstractServiceTest {
 
         user.setName(updated.getName());
         user.setEmail(updated.getEmail());
-        user.setPassword(updated.getPassword());
 
-        assertEquals(updated.toString(), user.toString());
+        assertEquals(updated, user);
     }
 
     @Test
     public void getAll() throws Exception {
-        assertEquals(USERS.toString(), service.getAll().toString());
+        assertEquals(USERS, service.getAll());
     }
 
 }
