@@ -21,12 +21,12 @@ public class DishServiceServiceTest extends AbstractServiceTest {
     private DishService service;
 
     @Test
-    public void get() throws Exception {
+    public void testGet() throws Exception {
         assertEquals(DISH1,service.get(100005));
     }
 
     @Test
-    public void save() throws Exception {
+    public void testSave() throws Exception {
         Dish created = getCreated();
         Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100011));
         created.setId(100026);
@@ -34,7 +34,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void update() throws Exception {
+    public void testUpdate() throws Exception {
         Dish updated = getUpdated();
         Dish dish = service.get(100005);
 
@@ -49,23 +49,23 @@ public class DishServiceServiceTest extends AbstractServiceTest {
 
 
     @Test
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         service.delete(DISH1.getId());
         assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2), service.getAll());
     }
 
     @Test
-    public void getByDate() throws Exception {
+    public void testGetByDate() throws Exception {
         assertEquals(Arrays.asList(DISH6, DISH5, DISH4), service.getByDate(LocalDate.of(2015, Month.MAY, 31)));
     }
 
     @Test
-    public void getByDateRestrauntID() throws Exception {
+    public void testGetByDateRestrauntID() throws Exception {
         assertEquals(Arrays.asList(DISH5, DISH4), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012));
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void testGetAll() throws Exception {
         assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1), service.getAll());
     }
 

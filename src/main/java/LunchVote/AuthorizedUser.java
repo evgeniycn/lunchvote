@@ -57,13 +57,4 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         return userTo.toString();
     }
 
-    /*public static int id = BaseEntity.START_SEQ;
-
-    public static int id() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        AuthorizedUser.id = id;
-    }*/
 }

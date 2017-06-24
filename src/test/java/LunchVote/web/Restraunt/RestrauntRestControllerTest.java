@@ -4,19 +4,20 @@ import LunchVote.AbstractRestTest;
 import LunchVote.TestUtil;
 import LunchVote.model.Restraunt;
 import LunchVote.service.RestrauntService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import java.util.Arrays;
+import java.util.List;
 
 import static LunchVote.RestrauntTestData.*;
 import static LunchVote.RestrauntTestData.RESTRAUNT2;
 import static LunchVote.RestrauntTestData.RESTRAUNT3;
 import static LunchVote.TestUtil.userHttpBasic;
 import static LunchVote.UserTestData.ADMIN1;
-import static LunchVote.RestrauntTestData.MATCHER;
 import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -38,35 +39,32 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + RESTRAUNT1.getId())
+        ResultActions resultActions = mockMvc.perform(get(REST_URL + RESTRAUNT1.getId())
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentMatcher(RESTRAUNT1));
-                //.andExpect(content().string(mapper.writeValueAsString(RESTRAUNT1)));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        assertEquals(RESTRAUNT1, mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), Restraunt.class));
     }
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get(REST_URL)
+        ResultActions resultActions = mockMvc.perform(get(REST_URL)
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1)));
-                //.andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1))));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2, RESTRAUNT1), mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), new TypeReference<List<Restraunt>>() {}));
     }
 
     @Test
     public void testGetAllWithTodayMenu() throws Exception {
-        mockMvc.perform(get(REST_URL + "/date/2015-05-31")
+        ResultActions resultActions = mockMvc.perform(get(REST_URL + "/date/2015-05-31")
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MATCHER.contentListMatcher(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4)));
-                //.andExpect(content().string(mapper.writeValueAsString(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4))));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4), mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), new TypeReference<List<Restraunt>>() {}));
     }
 
     @Test
@@ -90,7 +88,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
         mockMvc.perform(delete(REST_URL + RESTRAUNT1_ID)
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk());
-        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2).toString(), service.getAll().toString());
+        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4, RESTRAUNT3, RESTRAUNT2), service.getAll());
     }
 
     @Test
@@ -106,7 +104,7 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
         Restraunt returned = getMapper().readValue(TestUtil.getContent(action), Restraunt.class);
         created.setId(returned.getId());
 
-        assertEquals(created.toString(), returned.toString());
+        assertEquals(created, returned);
     }
 
     @Test
@@ -121,6 +119,6 @@ public class RestrauntRestControllerTest extends AbstractRestTest {
 
         Restraunt returned = getMapper().readValue(TestUtil.getContent(action), Restraunt.class);
 
-        assertEquals(updated.toString(), returned.toString());
+        assertEquals(updated, returned);
     }
 }

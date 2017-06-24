@@ -3,7 +3,6 @@ package LunchVote.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -49,7 +48,6 @@ public class Restraunt extends BaseEntity {
     @NotNull
     private LocalDate updateDate;
 
-    //To do: Change to Lazy
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restraunt")
     @OrderBy("id DESC")
     private List<Dish> dishList;
@@ -120,7 +118,6 @@ public class Restraunt extends BaseEntity {
                 "id='" + this.getId() + '\'' +
                 "name='" + name + '\'' +
                 ", updateDate=" + updateDate +
-                //", dishList=" + dishList +
                 '}';
     }
 

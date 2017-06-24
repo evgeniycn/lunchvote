@@ -14,7 +14,7 @@ public class TestServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.doGet(req, resp);
-        req.setAttribute("name", "Devcolibri");
+        req.setAttribute("name", "Test");
         req.getRequestDispatcher("/test.jsp").forward(req, resp);
     }
 

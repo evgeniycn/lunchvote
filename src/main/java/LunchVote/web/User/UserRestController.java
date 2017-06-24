@@ -45,7 +45,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/withVotes")
-    public Map<Integer, Integer> getAllVotesByDate() {
+    public Map<Integer, Integer> getAllVotesByToday() {
         return restrauntService.getAllWithVotesByDate(LocalDate.now());
     }
 

@@ -1,12 +1,11 @@
 package LunchVote.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Created by evgeniy on 13.06.2017.
@@ -18,6 +17,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "VOTES", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Vote extends BaseEntity {
+
+    public final static LocalTime VOTE_BEFORE = LocalTime.of(11,0);
 
     public static final String DELETE_BY_RESTRAUNT_ID = "Vote.deleteByRestrauntId";
 
@@ -60,6 +61,27 @@ public class Vote extends BaseEntity {
 
     public void setRestrauntId(Integer restrauntId) {
         this.restrauntId = restrauntId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vote vote = (Vote) o;
+
+        if (userId != null ? !userId.equals(vote.userId) : vote.userId != null) return false;
+        if (date != null ? !date.equals(vote.date) : vote.date != null) return false;
+        return !(restrauntId != null ? !restrauntId.equals(vote.restrauntId) : vote.restrauntId != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (restrauntId != null ? restrauntId.hashCode() : 0);
+        return result;
     }
 
     @Override

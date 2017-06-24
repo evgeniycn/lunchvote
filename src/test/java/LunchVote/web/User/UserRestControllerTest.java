@@ -5,7 +5,6 @@ import LunchVote.TestUtil;
 import LunchVote.model.*;
 import LunchVote.service.RestrauntService;
 import LunchVote.service.UserService;
-import LunchVote.util.PasswordUtil;
 import LunchVote.util.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Rule;
@@ -15,11 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
+import javax.naming.TimeLimitExceededException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
 import static LunchVote.RestrauntTestData.RESTRAUNT2;
+import static LunchVote.RestrauntTestData.RESTRAUNT3;
 import static LunchVote.TestUtil.userHttpBasic;
 import static LunchVote.UserTestData.*;
 import static LunchVote.RestrauntTestData.RESTRAUNT1_ID;
@@ -69,7 +73,7 @@ public class UserRestControllerTest extends AbstractRestTest {
         user3.setLastVoteDate(LocalDate.now());
         User user2 = USER2;
         user2.setLastVoteDate(LocalDate.now());
-        ResultActions resultActions = mockMvc.perform(delete(REST_ADMIN_URL + USER1_ID)
+        mockMvc.perform(delete(REST_ADMIN_URL + USER1_ID)
                 .with(userHttpBasic(ADMIN1)))
                 .andExpect(status().isOk());
         assertEquals(Arrays.asList(ADMIN2, ADMIN1, user3, user2), service.getAll());
@@ -94,7 +98,6 @@ public class UserRestControllerTest extends AbstractRestTest {
     @Test
     public void testUpdate() throws Exception {
         User updated = getUpdated();
-        //updated.setPassword(PasswordUtil.encode(updated.getPassword()));
 
         ResultActions action = mockMvc.perform(post(REST_ADMIN_URL)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -117,9 +120,8 @@ public class UserRestControllerTest extends AbstractRestTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
-        assertEquals(Arrays.asList(ADMIN2, ADMIN1, USER3, user2, USER1), mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), new TypeReference<List<User>>(){}));
-
-        //.andExpect(MATCHER.contentListMatcher(Arrays.asList(ADMIN2, ADMIN1, USER3, user2, USER1)));
+        assertEquals(Arrays.asList(ADMIN2, ADMIN1, USER3, user2, USER1), mapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), new TypeReference<List<User>>() {
+        }));
     }
 
     @Test
@@ -128,6 +130,17 @@ public class UserRestControllerTest extends AbstractRestTest {
         vote.setDate(LocalDate.now());
         vote.setRestrauntId(RESTRAUNT1_ID);
         vote.setUserId(USER1_ID);
+
+        Field field = Vote.class.getDeclaredField("VOTE_BEFORE");
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        boolean isModifierAccessible = modifiersField.isAccessible();
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        boolean isAccessible = field.isAccessible();
+        field.setAccessible(true);
+        field.set(null, LocalTime.now().plusHours(1));
+        field.setAccessible(isAccessible);
+        modifiersField.setAccessible(isModifierAccessible);
 
         ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT1_ID)
                 .with(userHttpBasic(USER1)))
@@ -143,12 +156,14 @@ public class UserRestControllerTest extends AbstractRestTest {
     @Test
     public void testSendVoteWithoutMenu() throws Exception {
 
+        expectedException.expectCause(isA(NotFoundException.class));
+
         Vote vote = new Vote();
         vote.setDate(LocalDate.now());
-        vote.setRestrauntId(RESTRAUNT2.getId());
+        vote.setRestrauntId(RESTRAUNT3.getId());
         vote.setUserId(USER3.getId());
 
-        ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT2.getId())
+        ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT3.getId())
                 .with(userHttpBasic(USER3)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -157,7 +172,7 @@ public class UserRestControllerTest extends AbstractRestTest {
         Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
         vote.setId(returned.getId());
         assertEquals(vote, returned);
-        restrauntService.getAllWithVotesByDate(LocalDate.now());
+        assertEquals("{100011=1, 100012=1}", restrauntService.getAllWithVotesByDate(LocalDate.now()).toString());
     }
 
     @Test
@@ -167,6 +182,50 @@ public class UserRestControllerTest extends AbstractRestTest {
         vote.setDate(LocalDate.now());
         vote.setRestrauntId(RESTRAUNT2.getId());
         vote.setUserId(USER2.getId());
+
+        Field field = Vote.class.getDeclaredField("VOTE_BEFORE");
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        boolean isModifierAccessible = modifiersField.isAccessible();
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        boolean isAccessible = field.isAccessible();
+        field.setAccessible(true);
+        field.set(null, LocalTime.now().plusHours(1));
+        field.setAccessible(isAccessible);
+        modifiersField.setAccessible(isModifierAccessible);
+
+        ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT2.getId())
+                .with(userHttpBasic(USER2)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+
+        Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
+        vote.setId(returned.getId());
+        assertEquals(vote, returned);
+        assertEquals("{100011=1, 100012=1}", restrauntService.getAllWithVotesByDate(LocalDate.now()).toString());
+    }
+
+    @Test
+    public void testUpdateVoteAfterAllowedTime() throws Exception {
+
+        expectedException.expectCause(isA(TimeLimitExceededException.class));
+
+        Vote vote = new Vote();
+        vote.setDate(LocalDate.now());
+        vote.setRestrauntId(RESTRAUNT2.getId());
+        vote.setUserId(USER2.getId());
+
+        Field field = Vote.class.getDeclaredField("VOTE_BEFORE");
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        boolean isModifierAccessible = modifiersField.isAccessible();
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        boolean isAccessible = field.isAccessible();
+        field.setAccessible(true);
+        field.set(null, LocalTime.now().minusHours(1));
+        field.setAccessible(isAccessible);
+        modifiersField.setAccessible(isModifierAccessible);
 
         ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT2.getId())
                 .with(userHttpBasic(USER2)))

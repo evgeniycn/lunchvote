@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static LunchVote.RestrauntTestData.*;
 import static org.junit.Assert.*;
@@ -26,13 +25,6 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
     public void testGet() throws Exception {
         assertEquals(RESTRAUNT1, service.get(100011));
     }
-
-    /*
-    @Test
-    public void get() throws Exception {
-        assertEquals(USER1, service.get(100000));
-    }
-     */
 
     @Test
     public void testDelete() throws Exception {
@@ -69,10 +61,4 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
     public void testGetAllWithTodayMenu() throws Exception {
         assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4), service.getAllWithTodayMenu(LocalDate.of(2015, Month.MAY, 31)));
     }
-
-    /*@Test
-    public void testGetVotesByDate() throws Exception {
-        assertEquals(RESTRAUNT2.toString(), service.getVotesByDateAndRestrauntId(LocalDate.of(2015, Month.MAY, 31), 100012).toString());
-    }*/
-
 }

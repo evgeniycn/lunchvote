@@ -2,16 +2,10 @@ package LunchVote;
 
 import LunchVote.model.Role;
 import LunchVote.model.User;
-import LunchVote.util.ModelMatcher;
-import LunchVote.util.PasswordUtil;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 
 import java.util.Arrays;
 
 import java.util.List;
-import java.util.Objects;
 
 import static LunchVote.model.BaseEntity.START_SEQ;
 
@@ -20,13 +14,6 @@ import static LunchVote.model.BaseEntity.START_SEQ;
  * Created by evgeniy on 02.06.2017.
  */
 public class UserTestData {
-
-    /*public static final ModelMatcher<User> MATCHER = ModelMatcher.of(User.class, (expected, actual) -> expected == actual ||
-            (comparePassword(expected.getPassword(), actual.getPassword()))
-                && Objects.equals(expected.getId(), actual.getId())
-                && Objects.equals(expected.getEmail(), actual.getEmail())
-                && Objects.equals(expected.getName(), actual.getName())
-                && Objects.equals(expected.getRoles(), actual.getRoles()));*/
 
     public static final int USER1_ID = START_SEQ;
 

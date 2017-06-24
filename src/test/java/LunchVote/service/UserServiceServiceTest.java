@@ -21,18 +21,18 @@ public class UserServiceServiceTest extends AbstractServiceTest {
     private UserService service;
 
     @Test
-    public void get() throws Exception {
+    public void testGet() throws Exception {
         assertEquals(USER1, service.get(100000));
     }
 
     @Test
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         service.delete(100001);
         assertEquals(Arrays.asList(ADMIN2, ADMIN1, USER3, USER1), service.getAll());
     }
 
     @Test
-    public void save() throws Exception {
+    public void testSave() throws Exception {
         User user = getCreated();
         user.setId(100026);
         User created = service.save(new User(null, "New user", "new_user@gmail.com", PasswordUtil.encode("new_user_password"), Role.ROLE_USER));
@@ -40,7 +40,7 @@ public class UserServiceServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void update() throws Exception {
+    public void testUpdate() throws Exception {
         User updated = getUpdated();
         User user = service.get(100002);
 
@@ -51,7 +51,7 @@ public class UserServiceServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void testGetAll() throws Exception {
         assertEquals(USERS, service.getAll());
     }
 

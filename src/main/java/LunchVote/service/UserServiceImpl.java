@@ -21,6 +21,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
+import static LunchVote.model.Vote.VOTE_BEFORE;
 
 /**
  * Created by Evgeniy on 07.05.2017.
@@ -66,7 +67,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
 
-    //Change isAfter to isBefore after testing
     @Override
     public Vote sendVote(int restrauntId) throws TimeLimitExceededException {
         Vote vote = new Vote();
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (!hasTodayMenu)
             throw new NotFoundException("No menu from this restraunt available for today");
 
-        if (LocalTime.now().isAfter(LocalTime.of(11, 0))) {
+        if (LocalTime.now().isBefore(VOTE_BEFORE)) {
             userRepository.sendVote(vote);
             User user = get(AuthorizedUser.id());
             user.setLastVoteDate(LocalDate.now());

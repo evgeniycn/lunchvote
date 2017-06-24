@@ -6,7 +6,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -132,9 +131,7 @@ public class User extends BaseEntity {
 
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        //if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (password != null ? !PasswordUtil.isMatch(password, user.password) : user.password != null) return false;
-        //if (lastVoteDate != null ? !lastVoteDate.equals(user.lastVoteDate) : user.lastVoteDate != null) return false;
         return roles != null ? roles.equals(user.roles) : user.roles == null;
     }
 
