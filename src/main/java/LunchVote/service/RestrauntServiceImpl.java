@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static LunchVote.util.ValidationUtil.checkEmptyArray;
 import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -45,13 +46,13 @@ public class RestrauntServiceImpl implements RestrauntService {
 
     @Override
     public List<Restraunt> getAll() {
-        return restrauntRepository.getAll();
+        return checkEmptyArray(restrauntRepository.getAll());
     }
 
     @Override
     public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
         Assert.notNull(date, "date must not be null");
-        return restrauntRepository.getAllWithTodayMenu(date);
+        return checkEmptyArray(restrauntRepository.getAllWithTodayMenu(date));
     }
 
     @Override
@@ -59,7 +60,7 @@ public class RestrauntServiceImpl implements RestrauntService {
         Assert.notNull(date, "date must not be null");
         //restrauntId, numberOfVotes
         Map<Integer, Integer> votesResultByDate = new HashMap<>();
-        List<Vote> votesByDate = restrauntRepository.getAllWithVotesByDate(date);
+        List<Vote> votesByDate = checkEmptyArray(restrauntRepository.getAllWithVotesByDate(date));
         for (Vote vote : votesByDate) {
             votesResultByDate.merge(vote.getRestrauntId(), 1, (oldValue, one) -> oldValue + one);
         }

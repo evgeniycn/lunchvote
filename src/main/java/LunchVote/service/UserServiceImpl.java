@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import static LunchVote.util.ValidationUtil.checkEmptyArray;
 import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
 import static LunchVote.model.Vote.VOTE_BEFORE;
 
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public List<User> getAll() {
-        return userRepository.getAll();
+        return checkEmptyArray(userRepository.getAll());
     }
 
 
@@ -74,7 +75,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         vote.setDate(LocalDate.now());
         vote.setRestrauntId(restrauntId);
 
-        List<Restraunt> allWithTodayMenu = restrauntRepository.getAllWithTodayMenu(LocalDate.now());
+        List<Restraunt> allWithTodayMenu = checkEmptyArray(restrauntRepository.getAllWithTodayMenu(LocalDate.now()));
 
         boolean hasTodayMenu = false;
         for (Restraunt restraunt : allWithTodayMenu) {

@@ -12,6 +12,8 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.util.List;
 
+import static LunchVote.util.ValidationUtil.checkEmptyArray;
+import static LunchVote.util.ValidationUtil.checkNotFound;
 import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -61,18 +63,18 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<Dish> getByDate(LocalDate date) {
         Assert.notNull(date, "date must not be null");
-        return dishRepository.getByDate(date);
+        return checkEmptyArray(dishRepository.getByDate(date));
     }
 
     @Override
     public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
         Assert.notNull(date, "date must not be null");
         Assert.notNull(restrauntId, "restrauntId must not be null");
-        return dishRepository.getByDateRestrauntID(date, restrauntId);
+        return checkEmptyArray(dishRepository.getByDateRestrauntID(date, restrauntId));
     }
 
     @Override
     public List<Dish> getAll() {
-        return dishRepository.getAll();
+        return checkEmptyArray(dishRepository.getAll());
     }
 }

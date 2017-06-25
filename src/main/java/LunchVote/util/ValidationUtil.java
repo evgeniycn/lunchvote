@@ -2,6 +2,8 @@ package LunchVote.util;
 
 import LunchVote.util.exception.NotFoundException;
 
+import java.util.List;
+
 /**
  * Created by evgeniy on 08.05.2017.
  */
@@ -23,10 +25,24 @@ public class ValidationUtil {
         return object;
     }
 
+    public static <T> List<T> checkEmptyArray(List<T> object) {
+        if (object.isEmpty()) throw new NotFoundException("No data found per request");
+        return object;
+    }
+
     public static void checkNotFound(boolean found, String msg) {
         if (!found) {
             throw new NotFoundException("Not found entity with " + msg);
         }
+    }
+    public static Throwable getRootCause(Throwable t) {
+        Throwable result = t;
+        Throwable cause;
+
+        while (null != (cause = result.getCause()) && (result != cause)) {
+            result = cause;
+        }
+        return result;
     }
 
 }
