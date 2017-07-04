@@ -1,12 +1,12 @@
-package LunchVote;
+package lunchvote;
 
 
-import LunchVote.model.Dish;
+import lunchvote.model.Dish;
 
 import java.time.LocalDate;
 import java.time.Month;
 
-import static LunchVote.model.BaseEntity.START_SEQ;
+import static lunchvote.model.BaseEntity.START_SEQ;
 import static java.time.LocalDate.of;
 
 /**

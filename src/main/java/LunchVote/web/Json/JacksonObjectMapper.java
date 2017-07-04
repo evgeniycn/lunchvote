@@ -1,4 +1,4 @@
-package LunchVote.web.Json;
+package lunchvote.web.Json;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,8 +1,8 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.model.Restraunt;
-import LunchVote.model.Vote;
-import LunchVote.repository.RestrauntRepository;
+import lunchvote.model.Restraunt;
+import lunchvote.model.Vote;
+import lunchvote.repository.RestrauntRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static LunchVote.util.ValidationUtil.checkEmptyArray;
-import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
+import static lunchvote.util.ValidationUtil.checkEmptyArray;
+import static lunchvote.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Created by Evgeniy on 07.05.2017.

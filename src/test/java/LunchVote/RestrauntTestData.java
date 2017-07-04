@@ -1,13 +1,13 @@
-package LunchVote;
+package lunchvote;
 
-import LunchVote.model.Restraunt;
+import lunchvote.model.Restraunt;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
-import static LunchVote.model.BaseEntity.START_SEQ;
+import static lunchvote.model.BaseEntity.START_SEQ;
 import static java.time.LocalDate.of;
 
 /**

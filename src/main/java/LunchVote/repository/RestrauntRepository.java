@@ -1,7 +1,7 @@
-package LunchVote.repository;
+package lunchvote.repository;
 
-import LunchVote.model.Restraunt;
-import LunchVote.model.Vote;
+import lunchvote.model.Restraunt;
+import lunchvote.model.Vote;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -1,6 +1,6 @@
-package LunchVote.repository;
+package lunchvote.repository;
 
-import LunchVote.model.Dish;
+import lunchvote.model.Dish;
 
 import java.time.LocalDate;
 import java.util.List;

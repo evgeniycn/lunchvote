@@ -1,9 +1,9 @@
-package LunchVote.web.Dish;
+package lunchvote.web.Dish;
 
-import LunchVote.AbstractRestTest;
-import LunchVote.TestUtil;
-import LunchVote.model.Dish;
-import LunchVote.service.DishService;
+import lunchvote.AbstractRestTest;
+import lunchvote.TestUtil;
+import lunchvote.model.Dish;
+import lunchvote.service.DishService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,14 +11,14 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
 
-import static LunchVote.RestrauntTestData.RESTRAUNT3;
-import static LunchVote.TestUtil.userHttpBasic;
-import static LunchVote.UserTestData.ADMIN1;
-import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
+import static lunchvote.RestrauntTestData.RESTRAUNT3;
+import static lunchvote.TestUtil.userHttpBasic;
+import static lunchvote.UserTestData.ADMIN1;
+import static lunchvote.web.Json.JacksonObjectMapper.getMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static LunchVote.DishTestData.*;
-import static LunchVote.DishTestData.DISH1;
-import static LunchVote.DishTestData.DISH2;
+import static lunchvote.DishTestData.*;
+import static lunchvote.DishTestData.DISH1;
+import static lunchvote.DishTestData.DISH2;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

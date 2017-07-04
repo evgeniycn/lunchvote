@@ -1,6 +1,6 @@
-package LunchVote.util;
+package lunchvote.util;
 
-import LunchVote.util.exception.NotFoundException;
+import lunchvote.util.exception.NotFoundException;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package LunchVote.web.User;
+package lunchvote.web.User;
 
-import LunchVote.AbstractRestTest;
-import LunchVote.TestUtil;
-import LunchVote.model.*;
-import LunchVote.service.RestrauntService;
-import LunchVote.service.UserService;
-import LunchVote.util.exception.NotFoundException;
+import lunchvote.AbstractRestTest;
+import lunchvote.TestUtil;
+import lunchvote.model.*;
+import lunchvote.service.RestrauntService;
+import lunchvote.service.UserService;
+import lunchvote.util.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,16 +22,16 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static LunchVote.RestrauntTestData.RESTRAUNT2;
-import static LunchVote.RestrauntTestData.RESTRAUNT3;
-import static LunchVote.TestUtil.userHttpBasic;
-import static LunchVote.UserTestData.*;
-import static LunchVote.RestrauntTestData.RESTRAUNT1_ID;
+import static lunchvote.RestrauntTestData.RESTRAUNT2;
+import static lunchvote.RestrauntTestData.RESTRAUNT3;
+import static lunchvote.TestUtil.userHttpBasic;
+import static lunchvote.UserTestData.*;
+import static lunchvote.RestrauntTestData.RESTRAUNT1_ID;
 
 
-import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
-import static LunchVote.web.User.AdminRestController.ADMIN_USER_REST_URL;
-import static LunchVote.web.User.UserRestController.USER_REST_URL;
+import static lunchvote.web.Json.JacksonObjectMapper.getMapper;
+import static lunchvote.web.User.AdminRestController.ADMIN_USER_REST_URL;
+import static lunchvote.web.User.UserRestController.USER_REST_URL;
 import static org.hamcrest.core.Is.isA;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.junit.Assert.*;

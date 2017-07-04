@@ -1,7 +1,7 @@
-package LunchVote.to;
+package lunchvote.to;
 
 
-import LunchVote.HasId;
+import lunchvote.HasId;
 
 abstract public class BaseTo implements HasId {
     protected Integer id;

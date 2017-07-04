@@ -1,4 +1,4 @@
-package LunchVote;
+package lunchvote;
 
 public interface HasId {
     Integer getId();

@@ -7,7 +7,7 @@
 
     <!--<servlet>
         <servlet-name>testServlet</servlet-name>
-        <servlet-class>LunchVote.web.TestServlet</servlet-class>
+        <servlet-class>lunchvote.web.TestServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

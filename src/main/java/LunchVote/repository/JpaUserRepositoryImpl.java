@@ -1,8 +1,8 @@
-package LunchVote.repository;
+package lunchvote.repository;
 
-import LunchVote.AuthorizedUser;
-import LunchVote.model.User;
-import LunchVote.model.Vote;
+import lunchvote.AuthorizedUser;
+import lunchvote.model.User;
+import lunchvote.model.Vote;
 import org.hibernate.jpa.QueryHints;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;

@@ -1,13 +1,13 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.AuthorizedUser;
-import LunchVote.model.Restraunt;
-import LunchVote.model.User;
-import LunchVote.model.Vote;
-import LunchVote.repository.RestrauntRepository;
-import LunchVote.repository.UserRepository;
-import LunchVote.util.PasswordUtil;
-import LunchVote.util.exception.NotFoundException;
+import lunchvote.AuthorizedUser;
+import lunchvote.model.Restraunt;
+import lunchvote.model.User;
+import lunchvote.model.Vote;
+import lunchvote.repository.RestrauntRepository;
+import lunchvote.repository.UserRepository;
+import lunchvote.util.PasswordUtil;
+import lunchvote.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,9 +20,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static LunchVote.util.ValidationUtil.checkEmptyArray;
-import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
-import static LunchVote.model.Vote.VOTE_BEFORE;
+import static lunchvote.util.ValidationUtil.checkEmptyArray;
+import static lunchvote.util.ValidationUtil.checkNotFoundWithId;
+import static lunchvote.model.Vote.VOTE_BEFORE;
 
 /**
  * Created by Evgeniy on 07.05.2017.

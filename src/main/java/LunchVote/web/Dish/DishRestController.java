@@ -1,7 +1,7 @@
-package LunchVote.web.Dish;
+package lunchvote.web.Dish;
 
-import LunchVote.model.Dish;
-import LunchVote.service.DishService;
+import lunchvote.model.Dish;
+import lunchvote.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static LunchVote.web.Dish.DishRestController.DISH_REST_URL;
+import static lunchvote.web.Dish.DishRestController.DISH_REST_URL;
 
 /**
  * Created by evgeniy on 10.05.2017.

@@ -1,15 +1,15 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.AbstractServiceTest;
-import LunchVote.model.Role;
-import LunchVote.model.User;
-import LunchVote.util.PasswordUtil;
+import lunchvote.AbstractServiceTest;
+import lunchvote.model.Role;
+import lunchvote.model.User;
+import lunchvote.util.PasswordUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 
-import static LunchVote.UserTestData.*;
+import static lunchvote.UserTestData.*;
 import static org.junit.Assert.*;
 
 /**

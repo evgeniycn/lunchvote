@@ -1,8 +1,8 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.model.User;
-import LunchVote.model.Vote;
-import LunchVote.util.exception.NotFoundException;
+import lunchvote.model.User;
+import lunchvote.model.Vote;
+import lunchvote.util.exception.NotFoundException;
 
 import javax.naming.TimeLimitExceededException;
 import java.util.List;

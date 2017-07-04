@@ -1,4 +1,4 @@
-package LunchVote.model;
+package lunchvote.model;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

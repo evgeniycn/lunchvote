@@ -1,4 +1,4 @@
-package LunchVote.to;
+package lunchvote.to;
 
 import org.hibernate.validator.constraints.*;
 

@@ -1,7 +1,7 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.AbstractServiceTest;
-import LunchVote.model.Restraunt;
+import lunchvote.AbstractServiceTest;
+import lunchvote.model.Restraunt;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 
-import static LunchVote.RestrauntTestData.*;
+import static lunchvote.RestrauntTestData.*;
 import static org.junit.Assert.*;
 
 /**

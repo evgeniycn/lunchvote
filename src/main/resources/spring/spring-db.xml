@@ -10,7 +10,7 @@
         <tx:annotation-driven/>
 
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
-        <context:component-scan base-package="LunchVote.**.repository"/>
+        <context:component-scan base-package="lunchvote.**.repository"/>
 
         <!--no pooling-->
         <bean id="dataSource"
@@ -22,7 +22,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
-          p:packagesToScan="LunchVote.**.model">
+          p:packagesToScan="lunchvote.**.model">
         <property name="jpaPropertyMap">
             <map>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>

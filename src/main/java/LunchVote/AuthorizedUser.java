@@ -1,8 +1,8 @@
-package LunchVote;
+package lunchvote;
 
-import LunchVote.model.User;
-import LunchVote.to.UserTo;
-import LunchVote.util.UserUtil;
+import lunchvote.model.User;
+import lunchvote.to.UserTo;
+import lunchvote.util.UserUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

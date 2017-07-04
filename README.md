@@ -13,4 +13,4 @@ Voting system for deciding where to have lunch.
 
 Each restaurant provides new menu each day.
 
-SoapUI project for tests: LunchVote-soapui-project.xml
+SoapUI project for tests: lunchvote-soapui-project.xml

@@ -7,7 +7,7 @@
 
     <!--<bean class="ru.javawebinar.topjava.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>-->
 
-    <bean class="LunchVote.web.Json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
+    <bean class="lunchvote.web.Json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
@@ -34,7 +34,7 @@
         <property name="formatters">
             <set>
 
-                <bean class="LunchVote.util.converter.DateFormatter.LocalDateFormatter"/>
+                <bean class="lunchvote.util.converter.DateFormatter.LocalDateFormatter"/>
             </set>
         </property>
     </bean>
@@ -42,7 +42,7 @@
 
     <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
     <mvc:default-servlet-handler/>
-    <context:component-scan base-package="LunchVote.**.web"/>
+    <context:component-scan base-package="lunchvote.**.web"/>
 
 
 

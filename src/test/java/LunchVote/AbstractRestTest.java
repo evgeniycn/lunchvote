@@ -1,6 +1,6 @@
-package LunchVote;
+package lunchvote;
 
-import LunchVote.web.Json.JacksonObjectMapper;
+import lunchvote.web.Json.JacksonObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

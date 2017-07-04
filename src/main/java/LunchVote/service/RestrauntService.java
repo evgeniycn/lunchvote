@@ -1,6 +1,6 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.model.Restraunt;
+import lunchvote.model.Restraunt;
 
 import java.time.LocalDate;
 import java.util.List;

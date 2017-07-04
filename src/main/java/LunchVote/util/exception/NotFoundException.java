@@ -1,4 +1,4 @@
-package LunchVote.util.exception;
+package lunchvote.util.exception;
 
 /**
  * Created by Evgeniy on 07.05.2017.

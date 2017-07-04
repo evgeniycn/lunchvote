@@ -1,8 +1,8 @@
-package LunchVote.util;
+package lunchvote.util;
 
 
-import LunchVote.model.User;
-import LunchVote.to.UserTo;
+import lunchvote.model.User;
+import lunchvote.to.UserTo;
 
 public class UserUtil {
     public static UserTo asTo(User user) {

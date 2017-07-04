@@ -1,4 +1,4 @@
-package LunchVote.model;
+package lunchvote.model;
 
 
 import org.hibernate.validator.constraints.Length;

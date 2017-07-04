@@ -1,4 +1,4 @@
-package LunchVote.util;
+package lunchvote.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

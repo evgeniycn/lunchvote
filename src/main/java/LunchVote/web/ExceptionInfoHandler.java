@@ -1,8 +1,8 @@
-package LunchVote.web;
+package lunchvote.web;
 
-import LunchVote.util.ValidationUtil;
-import LunchVote.util.exception.ErrorInfo;
-import LunchVote.util.exception.NotFoundException;
+import lunchvote.util.ValidationUtil;
+import lunchvote.util.exception.ErrorInfo;
+import lunchvote.util.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

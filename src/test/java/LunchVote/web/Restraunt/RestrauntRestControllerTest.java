@@ -1,9 +1,9 @@
-package LunchVote.web.Restraunt;
+package lunchvote.web.Restraunt;
 
-import LunchVote.AbstractRestTest;
-import LunchVote.TestUtil;
-import LunchVote.model.Restraunt;
-import LunchVote.service.RestrauntService;
+import lunchvote.AbstractRestTest;
+import lunchvote.TestUtil;
+import lunchvote.model.Restraunt;
+import lunchvote.service.RestrauntService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
@@ -13,12 +13,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.Arrays;
 import java.util.List;
 
-import static LunchVote.RestrauntTestData.*;
-import static LunchVote.RestrauntTestData.RESTRAUNT2;
-import static LunchVote.RestrauntTestData.RESTRAUNT3;
-import static LunchVote.TestUtil.userHttpBasic;
-import static LunchVote.UserTestData.ADMIN1;
-import static LunchVote.web.Json.JacksonObjectMapper.getMapper;
+import static lunchvote.RestrauntTestData.*;
+import static lunchvote.RestrauntTestData.RESTRAUNT2;
+import static lunchvote.RestrauntTestData.RESTRAUNT3;
+import static lunchvote.TestUtil.userHttpBasic;
+import static lunchvote.UserTestData.ADMIN1;
+import static lunchvote.web.Json.JacksonObjectMapper.getMapper;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

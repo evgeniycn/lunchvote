@@ -14,7 +14,7 @@
         <csrf disabled="true"/>
     </http>
 
-    <beans:bean class="LunchVote.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
+    <beans:bean class="lunchvote.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
 
     <authentication-manager>
         <authentication-provider user-service-ref="userService">

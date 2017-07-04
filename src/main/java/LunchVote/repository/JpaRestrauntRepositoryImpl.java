@@ -1,7 +1,7 @@
-package LunchVote.repository;
+package lunchvote.repository;
 
-import LunchVote.model.Restraunt;
-import LunchVote.model.Vote;
+import lunchvote.model.Restraunt;
+import lunchvote.model.Vote;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

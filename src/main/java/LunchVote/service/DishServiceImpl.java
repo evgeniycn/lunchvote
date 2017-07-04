@@ -1,10 +1,9 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.model.Dish;
-import LunchVote.model.Vote;
-import LunchVote.repository.DishRepository;
-import LunchVote.repository.RestrauntRepository;
-import LunchVote.util.exception.NotFoundException;
+import lunchvote.model.Dish;
+import lunchvote.model.Vote;
+import lunchvote.repository.DishRepository;
+import lunchvote.repository.RestrauntRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -12,9 +11,9 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.util.List;
 
-import static LunchVote.util.ValidationUtil.checkEmptyArray;
-import static LunchVote.util.ValidationUtil.checkNotFound;
-import static LunchVote.util.ValidationUtil.checkNotFoundWithId;
+import static lunchvote.util.ValidationUtil.checkEmptyArray;
+import static lunchvote.util.ValidationUtil.checkNotFound;
+import static lunchvote.util.ValidationUtil.checkNotFoundWithId;
 
 /**
  * Created by Evgeniy on 07.05.2017.

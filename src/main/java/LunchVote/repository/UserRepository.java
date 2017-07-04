@@ -1,7 +1,7 @@
-package LunchVote.repository;
+package lunchvote.repository;
 
-import LunchVote.model.User;
-import LunchVote.model.Vote;
+import lunchvote.model.User;
+import lunchvote.model.Vote;
 
 import java.util.List;
 

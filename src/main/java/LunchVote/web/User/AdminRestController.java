@@ -1,7 +1,7 @@
-package LunchVote.web.User;
+package lunchvote.web.User;
 
-import LunchVote.model.User;
-import LunchVote.service.UserService;
+import lunchvote.model.User;
+import lunchvote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static LunchVote.web.User.AdminRestController.ADMIN_USER_REST_URL;
+import static lunchvote.web.User.AdminRestController.ADMIN_USER_REST_URL;
 
 /**
  * Created by evgeniy on 09.06.2017.

@@ -1,13 +1,13 @@
-package LunchVote;
+package lunchvote;
 
-import LunchVote.model.Role;
-import LunchVote.model.User;
+import lunchvote.model.Role;
+import lunchvote.model.User;
 
 import java.util.Arrays;
 
 import java.util.List;
 
-import static LunchVote.model.BaseEntity.START_SEQ;
+import static lunchvote.model.BaseEntity.START_SEQ;
 
 
 /**

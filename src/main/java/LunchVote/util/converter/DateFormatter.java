@@ -1,4 +1,4 @@
-package LunchVote.util.converter;
+package lunchvote.util.converter;
 
 import org.springframework.format.Formatter;
 
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import static LunchVote.util.DateTimeUtil.parseLocalDate;
+import static lunchvote.util.DateTimeUtil.parseLocalDate;
 
 
 /**

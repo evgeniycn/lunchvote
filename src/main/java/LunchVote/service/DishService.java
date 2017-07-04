@@ -1,6 +1,6 @@
-package LunchVote.service;
+package lunchvote.service;
 
-import LunchVote.model.Dish;
+import lunchvote.model.Dish;
 
 import java.time.LocalDate;
 import java.util.List;

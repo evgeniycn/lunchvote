@@ -1,4 +1,4 @@
-package LunchVote;
+package lunchvote;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

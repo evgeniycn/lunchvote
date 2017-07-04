@@ -25,7 +25,7 @@
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>
 
-    <cache name="LunchVote.model.User"
+    <cache name="lunchvote.model.User"
            maxElementsInMemory="25000"/>
 
 </ehcache>

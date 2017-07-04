@@ -1,4 +1,4 @@
-package LunchVote.util.exception;
+package lunchvote.util.exception;
 
 public class ErrorInfo {
     private final String url;

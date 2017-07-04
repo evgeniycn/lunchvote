@@ -1,7 +1,7 @@
-package LunchVote.web.Restraunt;
+package lunchvote.web.Restraunt;
 
-import LunchVote.model.Restraunt;
-import LunchVote.service.RestrauntService;
+import lunchvote.model.Restraunt;
+import lunchvote.service.RestrauntService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import static LunchVote.web.Restraunt.RestrauntRestController.RESTRAUNT_REST_URL;
+import static lunchvote.web.Restraunt.RestrauntRestController.RESTRAUNT_REST_URL;
 
 /**
  * Created by Evgeniy on 10.05.2017.

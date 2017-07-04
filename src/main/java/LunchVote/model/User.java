@@ -1,6 +1,6 @@
-package LunchVote.model;
+package lunchvote.model;
 
-import LunchVote.util.PasswordUtil;
+import lunchvote.util.PasswordUtil;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.validator.constraints.Email;

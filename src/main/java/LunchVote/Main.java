@@ -1,20 +1,11 @@
-package LunchVote;
+package lunchvote;
 
-import LunchVote.model.Dish;
-import LunchVote.model.Restraunt;
-import LunchVote.model.Vote;
-import LunchVote.service.RestrauntService;
-import LunchVote.service.UserService;
-import LunchVote.util.PasswordUtil;
-import LunchVote.web.Dish.DishRestController;
-import LunchVote.web.Restraunt.RestrauntRestController;
+import lunchvote.model.Dish;
+import lunchvote.model.Restraunt;
+import lunchvote.service.RestrauntService;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import javax.naming.TimeLimitExceededException;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by evgeniy on 10.05.2017.

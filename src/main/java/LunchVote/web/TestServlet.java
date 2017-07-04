@@ -1,4 +1,4 @@
-package LunchVote.web;
+package lunchvote.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
