@@ -33,7 +33,7 @@ CREATE TABLE dishes
   price            DOUBLE,
   restraunt_id     INTEGER      NOT NULL
 );
-CREATE UNIQUE INDEX dishes_unique_name_date_restraunt_id_idx ON dishes (name, restraunt_id, date);
+CREATE UNIQUE INDEX dishes_unique_name_date_restraunt_id_idx ON dishes (name, date, restraunt_id);
 
 CREATE TABLE restraunts
 (
