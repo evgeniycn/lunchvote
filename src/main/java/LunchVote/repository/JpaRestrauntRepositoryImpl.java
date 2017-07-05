@@ -50,7 +50,7 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepository {
     }
 
     @Override
-    public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
+    public List<Restraunt> getAllWithMenuByDate(LocalDate date) {
         return em.createNamedQuery(Restraunt.ALL_BY_TODAY, Restraunt.class)
                 .setParameter("date", date)
                 .getResultList();

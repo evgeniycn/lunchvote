@@ -4,6 +4,7 @@ import lunchvote.model.Dish;
 import lunchvote.model.Vote;
 import lunchvote.repository.DishRepository;
 import lunchvote.repository.RestrauntRepository;
+import lunchvote.to.DishTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -36,22 +37,22 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish save(Dish dish) {
-        Assert.notNull(dish, "dish must not be null");
-        LocalDate dishDate = dish.getDate();
+    public DishTo save(DishTo dishTo) {
+        Assert.notNull(dishTo, "dish must not be null");
+        LocalDate dishDate = dishTo.getDate();
 
         List<Vote> allWithVotesByDate = restrauntRepository.getAllWithVotesByDate(dishDate);
         for (Vote vote : allWithVotesByDate) {
-            if (vote.getRestrauntId().equals(dish.getRestrauntId())) {
+            if (vote.getRestrauntId().equals(dishTo.getRestrauntId())) {
                 throw new UnsupportedOperationException("Someone already voted for this restraunt today, menu cannot be changed");
             }
         }
 
-        LocalDate updatedDate = restrauntRepository.get(dish.getRestrauntId()).getUpdatedDate();
+        LocalDate updatedDate = restrauntRepository.get(dishTo.getRestrauntId()).getUpdatedDate();
         if (updatedDate == null || updatedDate.isBefore(dishDate)) {
-            dish = dishRepository.save(dish);
+            dishRepository.save(new Dish(dishTo.getId(), dishTo.getName(), dishTo.getPrice(), dishTo.getDate(), restrauntRepository.get(dishTo.getRestrauntId())));
         }
-        return dish;
+        return dishTo;
     }
 
     @Override
@@ -66,14 +67,14 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId) {
+    public List<Dish> getByDateRestrauntId(LocalDate date, int restrauntId) {
         Assert.notNull(date, "date must not be null");
         Assert.notNull(restrauntId, "restrauntId must not be null");
-        return checkEmptyArray(dishRepository.getByDateRestrauntID(date, restrauntId));
+        return checkEmptyArray(dishRepository.getByDateRestrauntId(date, restrauntId));
     }
 
     @Override
     public List<Dish> getAll() {
-        return checkEmptyArray(dishRepository.getAll());
+        return dishRepository.getAll();
     }
 }

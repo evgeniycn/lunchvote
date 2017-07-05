@@ -2,6 +2,7 @@ package lunchvote.web.Dish;
 
 import lunchvote.model.Dish;
 import lunchvote.service.DishService;
+import lunchvote.to.DishTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -29,23 +30,22 @@ public class DishRestController {
 
     @GetMapping(value = "/{id}")
     public Dish get(@PathVariable("id") int id) {
-        Dish dish = service.get(id);
-        return dish;
+        return service.get(id);
     }
 
-    @GetMapping(value = "/date/{date}")
-    public List<Dish> getByDate(@PathVariable("date") LocalDate date) {
+    @GetMapping(params = "date")
+    public List<Dish> getByDate(@RequestParam("date") LocalDate date) {
         return service.getByDate(date);
     }
 
-    @GetMapping(value = "/date/{date}/restraunt/{id}")
-    public List<Dish> getByDateRestrauntId(@PathVariable("date") LocalDate date, @PathVariable("id") int restrauntId) {
-        return service.getByDateRestrauntID(date, restrauntId);
+    @GetMapping(params = {"date", "restrauntId"})
+    public List<Dish> getByDateRestrauntId(@RequestParam("date") LocalDate date, @RequestParam("restrauntId") int restrauntId) {
+        return service.getByDateRestrauntId(date, restrauntId);
     }
 
     @PostMapping
-    public Dish save(@RequestBody Dish dish) {
-        return service.save(dish);
+    public DishTo save(@RequestBody DishTo dishTo) {
+        return service.save(dishTo);
     }
 
     @DeleteMapping(value = "/{id}")

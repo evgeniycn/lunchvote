@@ -2,6 +2,7 @@ package lunchvote.service;
 
 import lunchvote.AbstractServiceTest;
 import lunchvote.model.Dish;
+import lunchvote.to.DishTo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,7 @@ import java.util.Arrays;
 
 import static lunchvote.DishTestData.*;
 import static org.junit.Assert.*;
+import static lunchvote.RestrauntTestData.RESTRAUNT1;
 
 /**
  * Created by evgeniy on 02.06.2017.
@@ -27,8 +29,8 @@ public class DishServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void testSave() throws Exception {
-        Dish created = getCreated();
-        Dish dish = service.save(new Dish(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), 100011));
+        DishTo created = toGetCreated();
+        DishTo dish = service.save(new DishTo(null, "Created dish", 1.00, LocalDate.of(2015, Month.JUNE, 1), RESTRAUNT1.getId()));
         created.setId(100026);
         assertEquals(created, dish);
     }
@@ -41,7 +43,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
         dish.setName(updated.getName());
         dish.setDate(updated.getDate());
         dish.setPrice(updated.getPrice());
-        dish.setRestrauntId(updated.getRestrauntId());
+        dish.getRestraunt().setId(updated.getRestraunt().getId());
 
         assertEquals(updated, dish);
     }
@@ -61,7 +63,7 @@ public class DishServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetByDateRestrauntID() throws Exception {
-        assertEquals(Arrays.asList(DISH5, DISH4), service.getByDateRestrauntID(LocalDate.of(2015, Month.MAY, 31), 100012));
+        assertEquals(Arrays.asList(DISH5, DISH4), service.getByDateRestrauntId(LocalDate.of(2015, Month.MAY, 31), 100012));
     }
 
     @Test

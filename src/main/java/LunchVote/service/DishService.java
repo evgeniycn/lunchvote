@@ -1,6 +1,7 @@
 package lunchvote.service;
 
 import lunchvote.model.Dish;
+import lunchvote.to.DishTo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,14 +13,14 @@ public interface DishService {
 
     Dish get(int id);
 
-    Dish save(Dish dish);
+    DishTo save(DishTo dishTo);
 
     void delete(int id);
 
-    List<Dish> getByDate (LocalDate date);
+    List<Dish> getByDate(LocalDate date);
 
-    List<Dish> getByDateRestrauntID (LocalDate date, int restrauntId);
+    List<Dish> getByDateRestrauntId(LocalDate date, int restrauntId);
 
-    List<Dish> getAll ();
+    List<Dish> getAll();
 
 }

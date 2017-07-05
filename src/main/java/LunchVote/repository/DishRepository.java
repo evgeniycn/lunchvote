@@ -1,6 +1,7 @@
 package lunchvote.repository;
 
 import lunchvote.model.Dish;
+import lunchvote.to.DishTo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ public interface DishRepository {
 
     List<Dish> getByDate(LocalDate date);
 
-    List<Dish> getByDateRestrauntID(LocalDate date, int restrauntId);
+    List<Dish> getByDateRestrauntId(LocalDate date, int restrauntId);
 
     List<Dish> getAll();
 }

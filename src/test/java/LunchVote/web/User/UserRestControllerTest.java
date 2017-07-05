@@ -138,7 +138,7 @@ public class UserRestControllerTest extends AbstractRestTest {
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         boolean isAccessible = field.isAccessible();
         field.setAccessible(true);
-        field.set(null, LocalTime.now().plusHours(1));
+        field.set(null, LocalTime.now().plusMinutes(1));
         field.setAccessible(isAccessible);
         modifiersField.setAccessible(isModifierAccessible);
 
@@ -156,8 +156,6 @@ public class UserRestControllerTest extends AbstractRestTest {
     @Test
     public void testSendVoteWithoutMenu() throws Exception {
 
-        expectedException.expectCause(isA(NotFoundException.class));
-
         Vote vote = new Vote();
         vote.setDate(LocalDate.now());
         vote.setRestrauntId(RESTRAUNT3.getId());
@@ -165,14 +163,12 @@ public class UserRestControllerTest extends AbstractRestTest {
 
         ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT3.getId())
                 .with(userHttpBasic(USER3)))
-                .andExpect(status().isOk())
+                .andExpect(status().is4xxClientError())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
-        Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
-        vote.setId(returned.getId());
-        assertEquals(vote, returned);
-        assertEquals("{100011=1, 100012=1}", restrauntService.getAllWithVotesByDate(LocalDate.now()).toString());
+        Object returned = getMapper().readValue(TestUtil.getContent(action), Object.class);
+        assertEquals("{url=http://localhost/rest/users/vote/100013, cause=NotFoundException, details=[No menu from this restraunt available for today]}", returned.toString());
     }
 
     @Test
@@ -190,7 +186,7 @@ public class UserRestControllerTest extends AbstractRestTest {
         modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         boolean isAccessible = field.isAccessible();
         field.setAccessible(true);
-        field.set(null, LocalTime.now().plusHours(1));
+        field.set(null, LocalTime.now().plusMinutes(1));
         field.setAccessible(isAccessible);
         modifiersField.setAccessible(isModifierAccessible);
 
@@ -208,8 +204,6 @@ public class UserRestControllerTest extends AbstractRestTest {
 
     @Test
     public void testUpdateVoteAfterAllowedTime() throws Exception {
-
-        expectedException.expectCause(isA(TimeLimitExceededException.class));
 
         Vote vote = new Vote();
         vote.setDate(LocalDate.now());
@@ -229,25 +223,11 @@ public class UserRestControllerTest extends AbstractRestTest {
 
         ResultActions action = mockMvc.perform(get(REST_URL + "/vote/" + RESTRAUNT2.getId())
                 .with(userHttpBasic(USER2)))
-                .andExpect(status().isOk())
+                .andExpect(status().is5xxServerError())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
-        Vote returned = getMapper().readValue(TestUtil.getContent(action), Vote.class);
-        vote.setId(returned.getId());
-        assertEquals(vote, returned);
-        assertEquals("{100011=1, 100012=1}", restrauntService.getAllWithVotesByDate(LocalDate.now()).toString());
+        Object returned = getMapper().readValue(TestUtil.getContent(action), Object.class);
+        assertEquals("{url=http://localhost/rest/users/vote/100012, cause=TimeLimitExceededException, details=[Vote time is expired for today]}", returned.toString());
     }
-
-    @Test
-    public void testSendVoteForRestrauntWithoutTodayMenu() throws Exception {
-        expectedException.expectCause(isA(NotFoundException.class));
-        mockMvc.perform(get(REST_URL + "/vote/100013")
-                .with(userHttpBasic(USER1)))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(mapper.writeValueAsString(USER1)));
-    }
-
 }

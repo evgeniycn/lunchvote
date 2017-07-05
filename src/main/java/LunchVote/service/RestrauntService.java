@@ -19,7 +19,7 @@ public interface RestrauntService {
 
     List<Restraunt> getAll();
 
-    List<Restraunt> getAllWithTodayMenu(LocalDate date);
+    List<Restraunt> getAllWithMenuByDate(LocalDate date);
 
     Map<Integer, Integer> getAllWithVotesByDate(LocalDate date);
 }

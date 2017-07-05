@@ -50,9 +50,9 @@ public class RestrauntServiceImpl implements RestrauntService {
     }
 
     @Override
-    public List<Restraunt> getAllWithTodayMenu(LocalDate date) {
+    public List<Restraunt> getAllWithMenuByDate(LocalDate date) {
         Assert.notNull(date, "date must not be null");
-        return checkEmptyArray(restrauntRepository.getAllWithTodayMenu(date));
+        return checkEmptyArray(restrauntRepository.getAllWithMenuByDate(date));
     }
 
     @Override

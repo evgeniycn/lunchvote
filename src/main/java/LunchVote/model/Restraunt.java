@@ -1,6 +1,7 @@
 package lunchvote.model;
 
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -48,8 +49,9 @@ public class Restraunt extends BaseEntity {
     @NotNull
     private LocalDate updateDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restraunt")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restraunt")
     @OrderBy("id DESC")
+    @BatchSize(size = 200)
     private List<Dish> dishList;
 
 

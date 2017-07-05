@@ -48,13 +48,13 @@ public class RestrauntRestController {
         return service.getAll();
     }
 
-    @GetMapping(value = "/date/{date}")
-    public List<Restraunt> getAllWithMenuByDate(@PathVariable("date") LocalDate date) {
-        return service.getAllWithTodayMenu(date);
+    @GetMapping(params = "date")
+    public List<Restraunt> getAllWithMenuByDate(@RequestParam("date") LocalDate date) {
+        return service.getAllWithMenuByDate(date);
     }
 
-    @GetMapping(value = "/votes/{date}")
-    public Map<Integer, Integer> getAllVotesByDate(@PathVariable("date") LocalDate date) {
+    @GetMapping(value = "/votes", params = "date")
+    public Map<Integer, Integer> getAllVotesByDate(@RequestParam("date") LocalDate date) {
         return service.getAllWithVotesByDate(date);
     }
 

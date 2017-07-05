@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         vote.setDate(LocalDate.now());
         vote.setRestrauntId(restrauntId);
 
-        List<Restraunt> allWithTodayMenu = checkEmptyArray(restrauntRepository.getAllWithTodayMenu(LocalDate.now()));
+        List<Restraunt> allWithTodayMenu = checkEmptyArray(restrauntRepository.getAllWithMenuByDate(LocalDate.now()));
 
         boolean hasTodayMenu = false;
         for (Restraunt restraunt : allWithTodayMenu) {

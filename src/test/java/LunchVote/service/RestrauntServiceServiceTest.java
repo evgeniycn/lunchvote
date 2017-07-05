@@ -59,6 +59,6 @@ public class RestrauntServiceServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetAllWithTodayMenu() throws Exception {
-        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4), service.getAllWithTodayMenu(LocalDate.of(2015, Month.MAY, 31)));
+        assertEquals(Arrays.asList(RESTRAUNT6, RESTRAUNT5, RESTRAUNT4), service.getAllWithMenuByDate(LocalDate.of(2015, Month.MAY, 31)));
     }
 }

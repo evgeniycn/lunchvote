@@ -19,7 +19,7 @@ public interface RestrauntRepository {
 
     List<Restraunt> getAll();
 
-    List<Restraunt> getAllWithTodayMenu(LocalDate date);
+    List<Restraunt> getAllWithMenuByDate(LocalDate date);
 
     Restraunt getVotesByDateAndRestrauntId(LocalDate date, int restrauntId);
 
