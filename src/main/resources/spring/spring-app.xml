@@ -10,9 +10,7 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="lunchvote.**.service"/>
-
-    <!--Check why we need 2 package bellow:-->
     <context:component-scan base-package="lunchvote.**.repository"/>
-    <!--<context:component-scan base-package="lunchvote.**.web"/>-->
+
 
 </beans>
