@@ -40,13 +40,8 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/menu")
-    public List<Restraunt> getAllWithMenuByDate() {
+    public List<Restraunt> getAllWithTodayMenu() {
         return restrauntService.getAllWithMenuByDate(LocalDate.now());
-    }
-
-    @GetMapping(value = "/withVotes")
-    public Map<Integer, Integer> getAllVotesByToday() {
-        return restrauntService.getAllWithVotesByDate(LocalDate.now());
     }
 
 }

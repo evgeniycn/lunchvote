@@ -24,6 +24,7 @@ import java.util.List;
         @NamedQuery(name = Restraunt.ALL, query = "SELECT r FROM Restraunt r ORDER BY r.id DESC"),
         @NamedQuery(name = Restraunt.VOTES_BY_DATE_RESTRAUNT_ID, query = "SELECT r FROM Restraunt r WHERE r.updateDate=:date AND r.id=:id ORDER BY r.id DESC"),
         @NamedQuery(name = Restraunt.ALL_BY_DATE_WITH_VOTES, query = "SELECT r FROM Restraunt r WHERE r.updateDate=:date AND r.id=:id ORDER BY r.id DESC"),
+        @NamedQuery(name = Restraunt.ALL_BY_DATE_RESTRAUNT_ID, query = "SELECT r FROM Restraunt r WHERE r.updateDate=:date AND r.id=:restrauntId ORDER BY r.id DESC"),
 })
 
 @Entity
@@ -39,6 +40,8 @@ public class Restraunt extends BaseEntity {
     public static final String VOTES_BY_DATE_RESTRAUNT_ID = "Restraunt.getVotesByDateRestrauntId";
 
     public static final String ALL_BY_DATE_WITH_VOTES = "Restraunt.getAllByDateWithVotes";
+
+    public static final String ALL_BY_DATE_RESTRAUNT_ID = "Restraunt.getByDateRestrauntId";
 
     @Column(name = "NAME", nullable = false)
     @NotBlank

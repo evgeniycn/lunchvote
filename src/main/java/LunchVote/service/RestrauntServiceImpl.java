@@ -56,14 +56,16 @@ public class RestrauntServiceImpl implements RestrauntService {
     }
 
     @Override
-    public Map<Integer, Integer> getAllWithVotesByDate(LocalDate date) {
+    public List<Vote> getVotesByDateRestrauntId(LocalDate date, int restrauntId) {
         Assert.notNull(date, "date must not be null");
-        //restrauntId, numberOfVotes
-        Map<Integer, Integer> votesResultByDate = new HashMap<>();
-        List<Vote> votesByDate = checkEmptyArray(restrauntRepository.getAllWithVotesByDate(date));
-        for (Vote vote : votesByDate) {
-            votesResultByDate.merge(vote.getRestrauntId(), 1, (oldValue, one) -> oldValue + one);
-        }
-        return votesResultByDate;
+        return checkEmptyArray(restrauntRepository.getVotesByDateRestrauntId(date, restrauntId));
     }
+
+    @Override
+    public Restraunt getByDateRestrauntId(LocalDate date, int restrauntId) {
+        Assert.notNull(date, "date must not be null");
+        Assert.notNull(restrauntId, "restrauntId must not be null");
+        return restrauntRepository.getByDateRestrauntId(date, restrauntId);
+    }
+
 }

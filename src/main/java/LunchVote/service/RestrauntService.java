@@ -1,6 +1,7 @@
 package lunchvote.service;
 
 import lunchvote.model.Restraunt;
+import lunchvote.model.Vote;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,5 +22,7 @@ public interface RestrauntService {
 
     List<Restraunt> getAllWithMenuByDate(LocalDate date);
 
-    Map<Integer, Integer> getAllWithVotesByDate(LocalDate date);
+    List<Vote> getVotesByDateRestrauntId(LocalDate date, int restrauntId);
+
+    Restraunt getByDateRestrauntId(LocalDate date, int restrauntId);
 }

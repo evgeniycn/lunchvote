@@ -65,9 +65,18 @@ public class JpaRestrauntRepositoryImpl implements RestrauntRepository {
     }
 
     @Override
-    public List<Vote> getAllWithVotesByDate(LocalDate date) {
-        return em.createNamedQuery(Vote.ALL_BY_DATE_WITH_VOTES, Vote.class)
+    public List<Vote> getVotesByDateRestrauntId(LocalDate date, int restrauntId) {
+        return em.createNamedQuery(Vote.BY_DATE_RESTRAUNT_ID, Vote.class)
                 .setParameter("date", date)
+                .setParameter("restrauntId", restrauntId)
                 .getResultList();
+    }
+
+    @Override
+    public Restraunt getByDateRestrauntId(LocalDate date, int restrauntId) {
+        return em.createNamedQuery(Restraunt.ALL_BY_DATE_RESTRAUNT_ID, Restraunt.class)
+                .setParameter("date", date)
+                .setParameter("restrauntId", restrauntId)
+                .getSingleResult();
     }
 }

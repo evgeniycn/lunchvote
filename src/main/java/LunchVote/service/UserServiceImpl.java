@@ -19,6 +19,7 @@ import javax.naming.TimeLimitExceededException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import static lunchvote.util.ValidationUtil.checkEmptyArray;
 import static lunchvote.util.ValidationUtil.checkNotFoundWithId;
@@ -76,16 +77,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         vote.setRestrauntId(restrauntId);
 
         List<Restraunt> allWithTodayMenu = checkEmptyArray(restrauntRepository.getAllWithMenuByDate(LocalDate.now()));
+        Optional<Restraunt> withTodayMenu = allWithTodayMenu.stream().filter((anObject) -> restrauntId == anObject.getId()).findAny();
 
-        boolean hasTodayMenu = false;
-        for (Restraunt restraunt : allWithTodayMenu) {
-            if (restraunt.getId().equals(restrauntId)) {
-                hasTodayMenu = true;
-                break;
-            }
-        }
-
-        if (!hasTodayMenu)
+        if (!withTodayMenu.isPresent())
             throw new NotFoundException("No menu from this restraunt available for today");
 
         if (LocalTime.now().isBefore(VOTE_BEFORE)) {

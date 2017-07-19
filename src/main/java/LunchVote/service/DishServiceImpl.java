@@ -41,13 +41,6 @@ public class DishServiceImpl implements DishService {
         Assert.notNull(dishTo, "dish must not be null");
         LocalDate dishDate = dishTo.getDate();
 
-        List<Vote> allWithVotesByDate = restrauntRepository.getAllWithVotesByDate(dishDate);
-        for (Vote vote : allWithVotesByDate) {
-            if (vote.getRestrauntId().equals(dishTo.getRestrauntId())) {
-                throw new UnsupportedOperationException("Someone already voted for this restraunt today, menu cannot be changed");
-            }
-        }
-
         LocalDate updatedDate = restrauntRepository.get(dishTo.getRestrauntId()).getUpdatedDate();
         if (updatedDate == null || updatedDate.isBefore(dishDate)) {
             dishRepository.save(new Dish(dishTo.getId(), dishTo.getName(), dishTo.getPrice(), dishTo.getDate(), restrauntRepository.get(dishTo.getRestrauntId())));
@@ -64,13 +57,6 @@ public class DishServiceImpl implements DishService {
     public List<Dish> getByDate(LocalDate date) {
         Assert.notNull(date, "date must not be null");
         return checkEmptyArray(dishRepository.getByDate(date));
-    }
-
-    @Override
-    public List<Dish> getByDateRestrauntId(LocalDate date, int restrauntId) {
-        Assert.notNull(date, "date must not be null");
-        Assert.notNull(restrauntId, "restrauntId must not be null");
-        return checkEmptyArray(dishRepository.getByDateRestrauntId(date, restrauntId));
     }
 
     @Override

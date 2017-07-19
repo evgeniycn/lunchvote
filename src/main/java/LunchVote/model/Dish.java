@@ -15,7 +15,6 @@ import java.time.LocalDate;
  */
 @NamedQueries({
         @NamedQuery(name = Dish.ALL_BY_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date ORDER BY d.id DESC"),
-        @NamedQuery(name = Dish.ALL_BY_DATE_RESTRAUNT_ID, query = "SELECT d FROM Dish d WHERE d.date=:date AND d.restraunt.id=:restrauntId  ORDER BY d.id DESC"),
         @NamedQuery(name = Dish.DELETE_BY_ID, query = "DELETE FROM Dish d WHERE d.id=:id"),
         @NamedQuery(name = Dish.ALL, query = "SELECT d FROM Dish d ORDER BY d.id DESC"),
 })
@@ -26,8 +25,6 @@ public class Dish extends BaseEntity {
     public static final String ALL = "Dish.getAll";
 
     public static final String ALL_BY_DATE = "Dish.getByDate";
-
-    public static final String ALL_BY_DATE_RESTRAUNT_ID = "Dish.getByDateRestrauntId";
 
     public static final String DELETE_BY_ID = "Dish.deleteById";
 
@@ -45,10 +42,6 @@ public class Dish extends BaseEntity {
     @NotNull
     private LocalDate date;
 
-    /*@Column(name = "RESTRAUNT_ID", nullable = false)
-    @NotNull
-    private int restrauntId;*/
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "RESTRAUNT_ID", insertable = false, updatable = false)
     @BatchSize(size = 200)
@@ -60,7 +53,7 @@ public class Dish extends BaseEntity {
     }
 
     public Dish(String name, double price, LocalDate date, Restraunt restraunt) {
-        this(null,name, price, date, restraunt);
+        this(null, name, price, date, restraunt);
     }
 
     public Dish(Integer id, String name, double price, LocalDate date, Restraunt restraunt) {
@@ -70,10 +63,6 @@ public class Dish extends BaseEntity {
         this.date = date;
         this.restraunt = restraunt;
     }
-
-    /*public int getRestrauntId() {
-        return restrauntId;
-    }*/
 
     public String getName() {
         return name;
@@ -99,10 +88,6 @@ public class Dish extends BaseEntity {
         this.date = date;
     }
 
-    /*public void setRestrauntId(int restrauntId) {
-        this.restrauntId = restrauntId;
-    }*/
-
     public Restraunt getRestraunt() {
         return restraunt;
     }
@@ -119,7 +104,6 @@ public class Dish extends BaseEntity {
         Dish dish = (Dish) o;
 
         if (Double.compare(dish.price, price) != 0) return false;
-        //if (restrauntId != dish.restrauntId) return false;
         if (name != null ? !name.equals(dish.name) : dish.name != null) return false;
         return date != null ? date.equals(dish.date) : dish.date != null;
 
@@ -133,7 +117,6 @@ public class Dish extends BaseEntity {
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        //result = 31 * result + restrauntId;
         result = 31 * result + (restraunt != null ? restraunt.hashCode() : 0);
         return result;
     }
@@ -145,7 +128,6 @@ public class Dish extends BaseEntity {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", date=" + date +
-                //", restrauntId=" + restrauntId +
                 '}';
     }
 }

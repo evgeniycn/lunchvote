@@ -36,11 +36,18 @@
 
         <!--Tools-->
         <ehcache.version>2.10.3</ehcache.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
 
 
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+        </dependency>
 
         <!--security-->
         <dependency>

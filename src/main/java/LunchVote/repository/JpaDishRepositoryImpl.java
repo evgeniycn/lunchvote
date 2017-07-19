@@ -1,6 +1,7 @@
 package lunchvote.repository;
 
 import lunchvote.model.Dish;
+import lunchvote.model.Restraunt;
 import lunchvote.to.DishTo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,14 +44,6 @@ public class JpaDishRepositoryImpl implements DishRepository {
     public List<Dish> getByDate(LocalDate date) {
         return em.createNamedQuery(Dish.ALL_BY_DATE, Dish.class)
                 .setParameter("date", date)
-                .getResultList();
-    }
-
-    @Override
-    public List<Dish> getByDateRestrauntId(LocalDate date, int restrauntId) {
-        return em.createNamedQuery(Dish.ALL_BY_DATE_RESTRAUNT_ID, Dish.class)
-                .setParameter("date", date)
-                .setParameter("restrauntId", restrauntId)
                 .getResultList();
     }
 

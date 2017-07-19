@@ -12,7 +12,7 @@ import java.time.LocalTime;
  */
 @NamedQueries({
         @NamedQuery(name = Vote.DELETE_BY_RESTRAUNT_ID, query = "DELETE FROM Vote v WHERE v.userId=:userId AND v.date=:date"),
-        @NamedQuery(name = Vote.ALL_BY_DATE_WITH_VOTES, query = "SELECT v FROM Vote v WHERE v.date=:date ORDER BY v.date DESC"),
+        @NamedQuery(name = Vote.BY_DATE_RESTRAUNT_ID, query = "SELECT v FROM Vote v WHERE v.date=:date AND v.restrauntId=:restrauntId  ORDER BY v.date DESC"),
 })
 @Entity
 @Table(name = "VOTES", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
@@ -22,7 +22,7 @@ public class Vote extends BaseEntity {
 
     public static final String DELETE_BY_RESTRAUNT_ID = "Vote.deleteByRestrauntId";
 
-    public static final String ALL_BY_DATE_WITH_VOTES = "Vote.getAllByDateWithVotes";
+    public static final String BY_DATE_RESTRAUNT_ID = "Vote.getByDateRestrauntId";
 
     @Column(name = "USER_ID", nullable = false)
     @NotNull
@@ -87,7 +87,7 @@ public class Vote extends BaseEntity {
     @Override
     public String toString() {
         return "Vote{" +
-                "users=" + userId +
+                "user=" + userId +
                 ", date=" + date +
                 ", restraunt=" + restrauntId +
                 '}';

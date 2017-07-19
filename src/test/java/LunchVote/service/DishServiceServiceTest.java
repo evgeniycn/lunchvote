@@ -62,11 +62,6 @@ public class DishServiceServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testGetByDateRestrauntID() throws Exception {
-        assertEquals(Arrays.asList(DISH5, DISH4), service.getByDateRestrauntId(LocalDate.of(2015, Month.MAY, 31), 100012));
-    }
-
-    @Test
     public void testGetAll() throws Exception {
         assertEquals(Arrays.asList(DISH6, DISH5, DISH4, DISH3, DISH2, DISH1), service.getAll());
     }

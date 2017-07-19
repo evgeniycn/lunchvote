@@ -41,7 +41,7 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true);
     }
 
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
+    /*@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
     @ExceptionHandler(BindException.class)
     @ResponseBody
     public ErrorInfo bindValidationError(HttpServletRequest req, BindingResult result) {
@@ -53,7 +53,7 @@ public class ExceptionInfoHandler {
     @ResponseBody
     public ErrorInfo restValidationError(HttpServletRequest req, MethodArgumentNotValidException e) {
         return logAndGetValidationErrorInfo(req, e.getBindingResult());
-    }
+    }*/
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
@@ -62,13 +62,13 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true);
     }
 
-    private ErrorInfo logAndGetValidationErrorInfo(HttpServletRequest req, BindingResult result) {
+    /*private ErrorInfo logAndGetValidationErrorInfo(HttpServletRequest req, BindingResult result) {
         String[] details = result.getAllErrors().stream()
                 .map(fe -> messageUtil.getMessage(fe))
                 .toArray(String[]::new);
 
         return logAndGetErrorInfo(req, "ValidationException", details);
-    }
+    }*/
 
     private static ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException) {
         Throwable rootCause = ValidationUtil.getRootCause(e);

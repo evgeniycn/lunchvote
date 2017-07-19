@@ -23,5 +23,7 @@ public interface RestrauntRepository {
 
     Restraunt getVotesByDateAndRestrauntId(LocalDate date, int restrauntId);
 
-    List<Vote> getAllWithVotesByDate(LocalDate date);
+    List<Vote> getVotesByDateRestrauntId(LocalDate date, int restrauntId);
+
+    Restraunt getByDateRestrauntId(LocalDate date, int restrauntId);
 }

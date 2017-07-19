@@ -1,6 +1,7 @@
 package lunchvote.web.Dish;
 
 import lunchvote.model.Dish;
+import lunchvote.model.Restraunt;
 import lunchvote.service.DishService;
 import lunchvote.to.DishTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,6 @@ public class DishRestController {
     @GetMapping(params = "date")
     public List<Dish> getByDate(@RequestParam("date") LocalDate date) {
         return service.getByDate(date);
-    }
-
-    @GetMapping(params = {"date", "restrauntId"})
-    public List<Dish> getByDateRestrauntId(@RequestParam("date") LocalDate date, @RequestParam("restrauntId") int restrauntId) {
-        return service.getByDateRestrauntId(date, restrauntId);
     }
 
     @PostMapping

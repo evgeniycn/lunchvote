@@ -1,6 +1,7 @@
 package lunchvote.web.Restraunt;
 
 import lunchvote.model.Restraunt;
+import lunchvote.model.Vote;
 import lunchvote.service.RestrauntService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -53,9 +54,14 @@ public class RestrauntRestController {
         return service.getAllWithMenuByDate(date);
     }
 
-    @GetMapping(value = "/votes", params = "date")
-    public Map<Integer, Integer> getAllVotesByDate(@RequestParam("date") LocalDate date) {
-        return service.getAllWithVotesByDate(date);
+    @GetMapping(params = {"date", "restrauntId"})
+    public Restraunt getByDateRestrauntId(@RequestParam("date") LocalDate date, @RequestParam("restrauntId") int restrauntId) {
+        return service.getByDateRestrauntId(date, restrauntId);
+    }
+
+    @GetMapping(value = "/votes", params = {"date", "restrauntId"})
+    public List<Vote> getVotesByDateRestrauntId(@RequestParam("date") LocalDate date, @RequestParam("restrauntId") int restrauntId) {
+        return service.getVotesByDateRestrauntId(date, restrauntId);
     }
 
 }
